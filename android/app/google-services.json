@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "351876152515",
+    "firebase_url": "https://educonnect-3ee0c-default-rtdb.firebaseio.com",
+    "project_id": "educonnect-3ee0c",
+    "storage_bucket": "educonnect-3ee0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351876152515:android:2c84567d5868100cd63676",
+        "android_client_info": {
+          "package_name": "com.example.educonnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMzdYfjICDI2EonFpLZakqpOG6VaGSyZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
