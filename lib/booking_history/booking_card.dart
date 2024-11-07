@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:educonnect/booking_confirmation.dart';
+import 'package:educonnect/booking_history/canceled_booking_card.dart';
+import 'package:educonnect/booking_history/pending_booking_card.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// Widget to create the booking card
 Widget bookingCard(
   BuildContext context,
   String documentId,
   String bookingId,
+  String tutorId,
   String tutorName,
+  String userId,
+  String userName,
   String subject,
   String level,
   String date,
@@ -28,23 +32,41 @@ Widget bookingCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Tutor Name with Message Icon in the Same Row
+          // Tutor Name or Student Name with Message Icon in the Same Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Text(
-                    tutorName,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 79, 101, 241),
-                    ),
+                  // Fetch current user ID and determine their role
+                  FutureBuilder<String>(
+                    future: _getUserRole(userId, tutorId),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      } else if (snapshot.hasData) {
+                        String role = snapshot.data ?? "Unknown";
+                        // Choose the appropriate name based on the role
+                        String displayName =
+                            (role == "Student") ? tutorName : userName;
+                        return Text(
+                          displayName,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 79, 101, 241),
+                          ),
+                        );
+                      } else {
+                        return const Text("Unknown Role");
+                      }
+                    },
                   ),
                   IconButton(
                     onPressed: () {
-                      // Navigate to chat
+                      // Navigate to chat (Add your chat navigation logic here)
                     },
                     icon: const Icon(
                       Icons.message,
@@ -54,7 +76,6 @@ Widget bookingCard(
                   ),
                 ],
               ),
-              // Display the rate on the right side
               Text(
                 'RM${rate.toStringAsFixed(0)}/hour',
                 style: const TextStyle(
@@ -70,17 +91,11 @@ Widget bookingCard(
             children: [
               Text(
                 subject,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
+                style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
               Text(
                 date,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
+                style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
             ],
           ),
@@ -89,89 +104,43 @@ Widget bookingCard(
             children: [
               Text(
                 level,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
+                style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
               Text(
                 time,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
+                style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          // Conditional buttons based on booking type
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (isCanceled)
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BookingConfirmationPage(
-                              level: level,
-                              date: date,
-                              timeSlot: time,
-                              bookingId: bookingId,
-                              tutorName: tutorName,
-                              tutorSubject: subject,
-                              price: rate,
-                              isPast: true,
-                            ),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 80, 79, 79),
-                      ),
-                      child: const Text(
-                        "View details",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                CanceledBookingCard(
+                  level: level,
+                  date: date,
+                  time: time,
+                  bookingId: bookingId,
+                  tutorId: tutorId,
+                  tutorName: tutorName,
+                  userId: userId,
+                  userName: userName,
+                  subject: subject,
+                  rate: rate,
                 )
               else if (isPending)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          _showCancellationConfirmation(documentId, context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text("Cancel"),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Reschedule booking logic
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text("Reschedule"),
-                      ),
-                    ),
-                  ],
+                PendingBookingCard(
+                  documentId: documentId,
+                  level: level,
+                  date: date,
+                  time: time,
+                  tutorName: tutorName,
+                  userName: userName,
+                  subject: subject,
+                  rate: rate,
+                  bookingId: bookingId,
+                  tutorId: tutorId,
                 )
               else
                 ElevatedButton(
@@ -191,73 +160,46 @@ Widget bookingCard(
   );
 }
 
-// Show confirmation dialog for cancellation
-void _showCancellationConfirmation(String documentId, BuildContext context) {
-  final rootContext = context; // Save the root context
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Confirm Cancellation'),
-        content: const Text('Are you sure you want to cancel this booking?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: const Text('No'),
-          ),
-          TextButton(
-            onPressed: () async {
-              Navigator.of(context).pop(); // Close the dialog
-              await _cancelBooking(
-                  documentId, rootContext); // Use rootContext here
-            },
-            child: const Text('Yes'),
-          ),
-        ],
-      );
-    },
-  );
+// Function to get current user's role by comparing their ID
+Future<String> _getUserRole(String userId, String tutorId) async {
+  final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+  if (currentUserId == userId) {
+    return "Student"; // Current user is the student
+  } else if (currentUserId == tutorId) {
+    return "Tutor"; // Current user is the tutor
+  } else {
+    return "Unknown"; // If for some reason the current user is neither
+  }
 }
 
-Future<void> _cancelBooking(String documentId, BuildContext context) async {
-  print('Attempting to cancel booking with Document ID: $documentId');
-
+Future<String?> _fetchTutorNameFromBookingId(String bookingId) async {
   try {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('bookings').doc(documentId);
-    DocumentSnapshot doc = await docRef.get();
+    QuerySnapshot bookingSnapshot = await FirebaseFirestore.instance
+        .collection('bookings')
+        .where('bookingId', isEqualTo: bookingId)
+        .get();
 
-    if (!doc.exists) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Booking not found. Cannot cancel.'),
-        ),
-      );
-      return;
-    }
-
-    // Update the booking document instead of deleting it
-    await docRef.update({
-      'isCanceled': true,
-      'isPending': false,
-      'isAccepted': false,
-      'isCompleted': false,
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Booking cancelled successfully.'),
-      ),
-    );
+    return bookingSnapshot.docs.isNotEmpty
+        ? bookingSnapshot.docs.first['tutorName']
+        : null;
   } catch (e) {
-    print('Error cancelling booking: $e');
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Failed to cancel booking. Please try again.'),
-      ),
-    );
+    print("Error fetching tutor name: $e");
+    return null;
+  }
+}
+
+Future<String?> _fetchStudentNameFromBookingId(String bookingId) async {
+  try {
+    QuerySnapshot bookingSnapshot = await FirebaseFirestore.instance
+        .collection('bookings')
+        .where('bookingId', isEqualTo: bookingId)
+        .get();
+
+    return bookingSnapshot.docs.isNotEmpty
+        ? bookingSnapshot.docs.first['userName']
+        : null;
+  } catch (e) {
+    print("Error fetching student name: $e");
+    return null;
   }
 }

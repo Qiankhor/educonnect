@@ -1,10 +1,16 @@
+import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor.dart';
+import 'package:educonnect/tutor_service.dart';
 import 'package:flutter/material.dart';
 import 'primary_tutor_card.dart';
 import 'primary_filter_bar.dart';
 
 class PrimaryScreen extends StatefulWidget {
-  const PrimaryScreen({super.key});
+  final List<Tutor> tutors;
+  final CurrentUser currentUser;
+
+  const PrimaryScreen(
+      {super.key, required this.tutors, required this.currentUser});
 
   @override
   PrimaryScreenState createState() => PrimaryScreenState();
@@ -17,21 +23,29 @@ class PrimaryScreenState extends State<PrimaryScreen> {
   @override
   void initState() {
     super.initState();
-    displayedTutors =
-        allTutors.where((tutor) => tutor.level == 'Primary').toList();
+    fetchPrimaryTutors();
   }
 
+  // Fetch primary level tutors
+  Future<void> fetchPrimaryTutors() async {
+    TutorService tutorService = TutorService();
+    List<Tutor> tutors = await tutorService.fetchTutors();
+    setState(() {
+      // Filter tutors by primary level
+      displayedTutors =
+          tutors.where((tutor) => tutor.level == 'Primary').toList();
+    });
+  }
+
+  // Filter tutors based on selected filter
   void onFilterSelected(String filter) {
     setState(() {
       selectedFilter = filter;
       if (filter == 'All') {
-        displayedTutors =
-            allTutors.where((tutor) => tutor.level == 'Primary').toList();
+        fetchPrimaryTutors(); // Fetch again to reset the filter
       } else {
-        displayedTutors = allTutors
-            .where(
-                (tutor) => tutor.subject == filter && tutor.level == 'Primary')
-            .toList();
+        displayedTutors =
+            displayedTutors.where((tutor) => tutor.subject == filter).toList();
       }
     });
   }
@@ -51,7 +65,10 @@ class PrimaryScreenState extends State<PrimaryScreen> {
               itemCount: displayedTutors.length,
               itemBuilder: (context, index) {
                 final tutor = displayedTutors[index];
-                return PrimaryTutorCard(tutor: tutor);
+                return PrimaryTutorCard(
+                  tutor: tutor,
+                  currentUser: widget.currentUser,
+                );
               },
             ),
           ),

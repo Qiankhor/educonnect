@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="firebase_database_url" translatable="false">https://educonnect-3ee0c-default-rtdb.firebaseio.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">351876152515</string>
-    <string name="google_api_key" translatable="false">AIzaSyDMzdYfjICDI2EonFpLZakqpOG6VaGSyZM</string>
-    <string name="google_app_id" translatable="false">1:351876152515:android:2c84567d5868100cd63676</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDMzdYfjICDI2EonFpLZakqpOG6VaGSyZM</string>
-    <string name="google_storage_bucket" translatable="false">educonnect-3ee0c.appspot.com</string>
-    <string name="project_id" translatable="false">educonnect-3ee0c</string>
+    <string name="gcm_defaultSenderId" translatable="false">865014841760</string>
+    <string name="google_api_key" translatable="false">AIzaSyA7mUBkc2n8LBxcoLnPXNlrNF9oRfDsvFk</string>
+    <string name="google_app_id" translatable="false">1:865014841760:android:e427e8517526f3af0fe4c5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA7mUBkc2n8LBxcoLnPXNlrNF9oRfDsvFk</string>
+    <string name="google_storage_bucket" translatable="false">educonnect-410d6.firebasestorage.app</string>
+    <string name="project_id" translatable="false">educonnect-410d6</string>
 </resources>

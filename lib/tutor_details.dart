@@ -3,11 +3,14 @@ import 'package:educonnect/review_card.dart';
 import 'package:educonnect/tutor_personal_info.dart';
 import 'package:flutter/material.dart';
 import 'package:educonnect/tutor.dart';
+import 'package:educonnect/current_user.dart';
 
 class TutorDetails extends StatelessWidget {
   final Tutor tutor;
+  final CurrentUser currentUser;
 
-  const TutorDetails({super.key, required this.tutor});
+  const TutorDetails(
+      {super.key, required this.tutor, required this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class TutorDetails extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage(tutor.profileImage),
+              backgroundImage: NetworkImage(tutor.profileImageUrl),
             ),
             const SizedBox(height: 10),
             Text(
@@ -35,14 +38,16 @@ class TutorDetails extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            if (tutor.review)
+            if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   5,
                   (index) {
                     return Icon(
-                      index < tutor.rating ? Icons.star : Icons.star_border,
+                      index < (tutor.rating ?? 0)
+                          ? Icons.star
+                          : Icons.star_border,
                       color: Colors.black,
                       size: 24,
                     );
@@ -98,7 +103,7 @@ class TutorDetails extends StatelessWidget {
                   const SizedBox(height: 10),
                   PersonalInfo(tutor: tutor),
                   const SizedBox(height: 20),
-                  if (tutor.aboutme != '')
+                  if (tutor.aboutMe != '')
                     const Text(
                       'About me',
                       style: TextStyle(
@@ -109,19 +114,19 @@ class TutorDetails extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  if (tutor.aboutme != '')
+                  if (tutor.aboutMe != '')
                     Container(
                       decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       width: 500,
                       padding: const EdgeInsets.all(15),
-                      child: Text(tutor.aboutme),
+                      child: Text(tutor.aboutMe),
                     ),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      if (tutor.review)
+                      if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
                         const Text(
                           'Reviews (1)',
                           style: TextStyle(
@@ -130,13 +135,13 @@ class TutorDetails extends StatelessWidget {
                           ),
                         ),
                       const SizedBox(width: 8),
-                      if (tutor.review)
+                      if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
                         Row(
                           children: List.generate(
                             5,
                             (index) {
                               return Icon(
-                                index < tutor.rating
+                                index < (tutor.rating ?? 0)
                                     ? Icons.star
                                     : Icons.star_border,
                                 color: Colors.black,
@@ -150,7 +155,7 @@ class TutorDetails extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  if (tutor.review)
+                  if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
                     ReviewCard(
                       tutor: tutor,
                     ),
@@ -170,15 +175,24 @@ class TutorDetails extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  _showBookingSheet(context, tutor.level, tutor.name,
-                      tutor.subject, tutor.rate);
+                  _showBookingSheet(
+                      context,
+                      tutor.level,
+                      tutor.id,
+                      tutor.name,
+                      currentUser.id,
+                      currentUser.name,
+                      tutor.subject,
+                      tutor.ratePerHour,
+                      tutor.availableDays,
+                      tutor.availableTimeSlots);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(15),
                   backgroundColor: Colors.blue,
                 ),
                 child: Text(
-                  'Book a schedule (RM${tutor.rate}/hour)',
+                  'Book a schedule (RM${tutor.ratePerHour}/hour)',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -192,8 +206,17 @@ class TutorDetails extends StatelessWidget {
     );
   }
 
-  void _showBookingSheet(BuildContext context, String tutorLevel,
-      String tutorName, String tutorSubject, double price) {
+  void _showBookingSheet(
+      BuildContext context,
+      String tutorLevel,
+      String tutorId,
+      String tutorName,
+      String userId,
+      String userName,
+      String tutorSubject,
+      double price,
+      List<String> availableDays,
+      List<int> availableTimeSlots) {
     showModalBottomSheet(
       context: context, // Parent Scaffold context
       shape: const RoundedRectangleBorder(
@@ -203,10 +226,15 @@ class TutorDetails extends StatelessWidget {
         return BookingBottomSheet(
           parentContext: parentContext, // Pass the parent context here
           tutorLevel: tutorLevel,
+          tutorId: tutorId,
           tutorName: tutorName,
+          userId: userId,
+          userName: userName,
           tutorSubject: tutorSubject,
           price: price,
           onConfirm: (level, date, timeSlot) {},
+          availableDays: availableDays,
+          availableTimeSlots: availableTimeSlots,
         );
       },
     );

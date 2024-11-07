@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_history/booking_card.dart';
 import 'package:educonnect/booking_history/booking_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PastBookings extends StatefulWidget {
@@ -13,14 +14,62 @@ class PastBookings extends StatefulWidget {
 class _PastBookingsState extends State<PastBookings> {
   bool showCompleted = true;
   bool showCanceled = false;
+  List<String> bookedSessionIds = [];
 
-  // Stream query based on selected filter
-  Stream<QuerySnapshot<Map<String, dynamic>>> _getBookingsStream() {
-    return FirebaseFirestore.instance
-        .collection('bookings')
-        .where('isCompleted', isEqualTo: showCompleted)
-        .where('isCanceled', isEqualTo: showCanceled)
-        .snapshots();
+  @override
+  void initState() {
+    super.initState();
+    _fetchBookedSessions();
+  }
+
+  // Fetch bookedSession list from the current user's document
+  Future<void> _fetchBookedSessions() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (doc.exists) {
+        setState(() {
+          bookedSessionIds =
+              List<String>.from(doc.data()?['bookedSessions'] ?? []);
+        });
+      }
+    }
+  }
+
+  // Stream query based on selected filter and bookedSession list
+  Stream<QuerySnapshot<Map<String, dynamic>>> _getBookingsStream() async* {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (userDoc.exists) {
+        List<String> bookedSessions =
+            List<String>.from(userDoc.data()?['bookedSessions'] ?? []);
+
+        Query<Map<String, dynamic>> query = FirebaseFirestore.instance
+            .collection('bookings')
+            .where('bookingId', whereIn: bookedSessions); // Filter by bookingId
+
+        // Apply filters based on toggle buttons
+        if (showCompleted) {
+          query = query.where('isCompleted', isEqualTo: true);
+        }
+        if (showCanceled) {
+          query = query.where('isCanceled',
+              isEqualTo: true); // Filter canceled bookings
+        }
+
+        yield* query
+            .snapshots(); // Firestore already returns the correct type, no need to cast.
+      }
+    }
   }
 
   @override
@@ -54,7 +103,8 @@ class _PastBookingsState extends State<PastBookings> {
         ),
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: _getBookingsStream(),
+            stream:
+                _getBookingsStream(), // stream query based on toggle buttons
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -90,7 +140,10 @@ class _PastBookingsState extends State<PastBookings> {
                         context,
                         booking.documentId ?? '',
                         booking.bookingId,
+                        booking.tutorId,
                         booking.tutorName,
+                        booking.userId,
+                        booking.userName,
                         booking.subject,
                         booking.level,
                         booking.date,

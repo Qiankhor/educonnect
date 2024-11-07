@@ -1,11 +1,14 @@
+import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor_details.dart';
 import 'package:educonnect/tutor.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryTutorCard extends StatelessWidget {
   final Tutor tutor;
+  final CurrentUser currentUser;
 
-  const SecondaryTutorCard({super.key, required this.tutor});
+  const SecondaryTutorCard(
+      {super.key, required this.tutor, required this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SecondaryTutorCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 248, 225),
+          color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Row(
@@ -26,7 +29,7 @@ class SecondaryTutorCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage(tutor.profileImage),
+                  backgroundImage: NetworkImage(tutor.profileImageUrl),
                 ),
                 Text(
                   tutor.name,
@@ -35,11 +38,13 @@ class SecondaryTutorCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (tutor.review)
+                if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
                   Row(
                     children: List.generate(5, (index) {
                       return Icon(
-                        index < tutor.rating ? Icons.star : Icons.star_border,
+                        index < (tutor.rating ?? 0)
+                            ? Icons.star
+                            : Icons.star_border,
                         color: Colors.black,
                       );
                     }),
@@ -53,6 +58,7 @@ class SecondaryTutorCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      // Subject box
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
@@ -63,12 +69,35 @@ class SecondaryTutorCard extends StatelessWidget {
                         child: Text(
                           tutor.subject,
                           style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                      const SizedBox(width: 5), // Spacing between the boxes
+
+                      // Level box
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors
+                              .grey[300], // Different color for differentiation
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Text(
+                          tutor.level,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
                       const Spacer(),
+                      // Rate
                       Text(
-                        'RM${tutor.rate.toStringAsFixed(2)}/hour',
+                        'RM${tutor.ratePerHour.toStringAsFixed(0)}/hour',
                         style: const TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
@@ -134,13 +163,15 @@ class SecondaryTutorCard extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TutorDetails(tutor: tutor),
+                            builder: (context) => TutorDetails(
+                              tutor: tutor,
+                              currentUser: currentUser,
+                            ),
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 255, 244, 30),
+                        backgroundColor: const Color(0xFF91EF9A),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

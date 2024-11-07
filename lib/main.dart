@@ -6,9 +6,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: 'AIzaSyDMzdYfjICDI2EonFpLZakqpOG6VaGSyZM',
-          appId: '1:351876152515:android:2c84567d5868100cd63676',
-          messagingSenderId: '351876152515',
+          apiKey: 'AIzaSyA7mUBkc2n8LBxcoLnPXNlrNF9oRfDsvFk',
+          appId: '1:865014841760:android:e427e8517526f3af0fe4c5',
+          messagingSenderId: '865014841760',
           projectId: 'educonnect-410d6'));
   runApp(const EduConnectApp());
 }

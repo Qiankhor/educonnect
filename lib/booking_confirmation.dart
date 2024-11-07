@@ -7,7 +7,10 @@ class BookingConfirmationPage extends StatelessWidget {
   final String level;
   final String date;
   final String timeSlot;
+  final String tutorId;
   final String tutorName;
+  final String userId;
+  final String userName;
   final String tutorSubject;
   final String bookingId;
   final double price;
@@ -18,7 +21,10 @@ class BookingConfirmationPage extends StatelessWidget {
     required this.level,
     required this.date,
     required this.timeSlot,
+    required this.tutorId,
     required this.tutorName,
+    required this.userId,
+    required this.userName,
     required this.tutorSubject,
     required this.bookingId,
     required this.price,
@@ -79,7 +85,10 @@ class BookingConfirmationPage extends StatelessWidget {
                         // Create a Booking object to pass back
                         final newBooking = Booking(
                           bookingId: bookingId,
+                          tutorId: tutorId,
                           tutorName: tutorName,
+                          userId: userId,
+                          userName: userName,
                           subject: tutorSubject,
                           level: level,
                           date: date,
@@ -92,11 +101,15 @@ class BookingConfirmationPage extends StatelessWidget {
                         );
 
                         try {
+                          // Add booking to the 'bookings' collection
                           await FirebaseFirestore.instance
                               .collection('bookings')
                               .add({
                             'bookingId': bookingId,
+                            'tutorId': tutorId,
                             'tutorName': tutorName,
+                            'userId': userId,
+                            'userName': userName,
                             'subject': tutorSubject,
                             'level': level,
                             'date': date,
@@ -104,6 +117,22 @@ class BookingConfirmationPage extends StatelessWidget {
                             'price': price,
                             'isPending': true,
                             'timestamp': FieldValue.serverTimestamp(),
+                          });
+
+                          // Update student's bookedSessions array
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(userId)
+                              .update({
+                            'bookedSessions': FieldValue.arrayUnion([bookingId])
+                          });
+
+                          // Update tutor's bookedSessions array
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(tutorId)
+                              .update({
+                            'bookedSessions': FieldValue.arrayUnion([bookingId])
                           });
 
                           Fluttertoast.showToast(

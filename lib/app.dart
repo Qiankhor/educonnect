@@ -1,4 +1,4 @@
-import 'package:educonnect/navigation_menu.dart';
+import 'package:educonnect/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class EduConnectApp extends StatelessWidget {
@@ -8,7 +8,7 @@ class EduConnectApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'EduConnect',
-      home: NavigationMenu(),
+      home: LoginScreen(),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor.dart';
 import 'package:flutter/material.dart';
 import 'primary_level/primary_tutor_card.dart';
@@ -6,11 +7,13 @@ import 'secondary_level/secondary_tutor_card.dart';
 class SearchPage extends StatefulWidget {
   final List<Tutor> allTutors;
   final Function(List<Tutor>) onSearchResults;
+  final CurrentUser currentUser;
 
   const SearchPage({
     super.key,
     required this.allTutors,
     required this.onSearchResults,
+    required this.currentUser,
   });
 
   @override
@@ -32,7 +35,9 @@ class _SearchPageState extends State<SearchPage> {
                 tutor.subject.toLowerCase().contains(query.toLowerCase()) ||
                 tutor.location.toLowerCase().contains(query.toLowerCase()) ||
                 (rateQuery != null &&
-                    tutor.rate.toString().contains(rateQuery.toString())))
+                    tutor.ratePerHour
+                        .toString()
+                        .contains(rateQuery.toString())))
             .toList();
       }
     });
@@ -87,9 +92,15 @@ class _SearchPageState extends State<SearchPage> {
                 itemBuilder: (context, index) {
                   final tutor = _searchResultsTutor[index];
                   if (tutor.level == 'Primary') {
-                    return PrimaryTutorCard(tutor: tutor);
+                    return PrimaryTutorCard(
+                      tutor: tutor,
+                      currentUser: widget.currentUser,
+                    );
                   } else {
-                    return SecondaryTutorCard(tutor: tutor);
+                    return SecondaryTutorCard(
+                      tutor: tutor,
+                      currentUser: widget.currentUser,
+                    );
                   }
                 },
               ),

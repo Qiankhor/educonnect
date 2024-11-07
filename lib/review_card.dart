@@ -63,7 +63,7 @@ class ReviewCard extends StatelessWidget {
           Row(
             children: List.generate(5, (index) {
               return Icon(
-                index < tutor.rating ? Icons.star : Icons.star_border,
+                index < (tutor.rating ?? 0) ? Icons.star : Icons.star_border,
                 color: Colors.black,
                 size: 24, // Set the size of the star
               );

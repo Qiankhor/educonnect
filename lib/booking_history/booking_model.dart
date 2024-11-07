@@ -3,7 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Booking {
   final String? documentId; // Unique identifier for the booking
   final String bookingId;
-  final String tutorName; // Name of the tutor
+  final String tutorId;
+  final String tutorName;
+  final String userId;
+  final String userName;
   final String subject; // Subject being tutored
   final String level; // Education level of the student
   final String date; // Date of the booking
@@ -17,7 +20,10 @@ class Booking {
   Booking({
     this.documentId,
     required this.bookingId,
+    required this.tutorId,
     required this.tutorName,
+    required this.userId,
+    required this.userName,
     required this.subject,
     required this.level,
     required this.date,
@@ -35,7 +41,10 @@ class Booking {
     return Booking(
       documentId: doc.id,
       bookingId: data['bookingId'] ?? '',
+      tutorId: data['tutorId'] ?? '',
       tutorName: data['tutorName'] ?? '',
+      userId: data['userId'] ?? '',
+      userName: data['userName'] ?? '',
       subject: data['subject'] ?? '',
       level: data['level'] ?? '',
       date: data['date'] ?? '',
@@ -53,7 +62,10 @@ class Booking {
   Map<String, dynamic> toFirestore() {
     return {
       'boookingId': bookingId,
+      'tutorId': tutorId,
       'tutorName': tutorName,
+      'userId': userId,
+      'userName': userName,
       'subject': subject,
       'level': level,
       'date': date,

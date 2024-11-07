@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_history/booking_card.dart';
 import 'package:educonnect/booking_history/booking_model.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import for user authentication
 
 class UpcomingBookings extends StatefulWidget {
-  const UpcomingBookings({Key? key}) : super(key: key);
+  const UpcomingBookings({super.key});
 
   @override
   _UpcomingBookingsState createState() => _UpcomingBookingsState();
@@ -13,6 +14,30 @@ class UpcomingBookings extends StatefulWidget {
 class _UpcomingBookingsState extends State<UpcomingBookings> {
   bool showPending = true; // Show pending bookings by default
   bool showAccepted = false; // Show accepted bookings by default
+  List<String> userBookedSessions = []; // To store the user's booked sessions
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserBookedSessions();
+  }
+
+  // Fetch the current user's bookedSessions
+  Future<void> _fetchUserBookedSessions() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      final data = userDoc.data();
+      if (data != null && data['bookedSessions'] != null) {
+        setState(() {
+          userBookedSessions = List<String>.from(data['bookedSessions']);
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +46,13 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
         const SizedBox(height: 20),
         // Toggle Buttons for Upcoming Bookings
         ToggleButtons(
+          isSelected: [showPending, showAccepted],
+          onPressed: (int index) {
+            setState(() {
+              showPending = index == 0;
+              showAccepted = index == 1;
+            });
+          },
           children: const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -31,13 +63,6 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
               child: Text('Accepted'),
             ),
           ],
-          isSelected: [showPending, showAccepted],
-          onPressed: (int index) {
-            setState(() {
-              showPending = index == 0;
-              showAccepted = index == 1;
-            });
-          },
         ),
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -57,23 +82,27 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
                 return const Center(child: Text('No upcoming bookings.'));
               }
 
-              // Filter based on toggle selection
+              // Filter bookings based on the current user's bookedSessions and toggle selection
               final bookings = snapshot.data!.docs
                   .map((doc) =>
                       Booking.fromFirestore(doc)) // Convert to Booking objects
                   .where((booking) {
-                // Ensure the booking is either pending or accepted based on the toggle selection
-                if (showPending && booking.isPending) {
-                  return true; // Include pending bookings
-                } else if (showAccepted && booking.isAccepted) {
-                  return true; // Include accepted bookings
+                // Filter bookings by the booking ID in user's bookedSessions
+                if (!userBookedSessions.contains(booking.bookingId)) {
+                  return false;
                 }
-                return false; // Exclude other bookings
+
+                // Filter further based on toggle selection
+                if (showPending && booking.isPending) {
+                  return true;
+                } else if (showAccepted && booking.isAccepted) {
+                  return true;
+                }
+                return false;
               }).toList();
 
               if (bookings.isEmpty) {
-                return const Center(
-                    child: Text('No bookings found.')); // Handle no bookings
+                return const Center(child: Text('No bookings found.'));
               }
 
               return SingleChildScrollView(
@@ -86,7 +115,10 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
                         context,
                         booking.documentId ?? '',
                         booking.bookingId,
+                        booking.tutorId,
                         booking.tutorName,
+                        booking.userId,
+                        booking.userName,
                         booking.subject,
                         booking.level,
                         booking.date,

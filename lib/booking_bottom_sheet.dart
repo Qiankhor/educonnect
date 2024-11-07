@@ -7,18 +7,29 @@ class BookingBottomSheet extends StatefulWidget {
   final BuildContext parentContext;
   final Function(String level, String date, String timeSlot) onConfirm;
   final String tutorLevel;
+  final String tutorId;
   final String tutorName;
+  final String userId;
+  final String userName;
   final String tutorSubject;
   final double price;
+  final List<String>
+      availableDays; // e.g. ["Friday", "Thursday", "Wednesday", "Tuesday"]
+  final List<int> availableTimeSlots;
 
   const BookingBottomSheet({
     super.key,
     required this.parentContext,
     required this.onConfirm,
     required this.tutorLevel,
+    required this.tutorId,
     required this.tutorName,
+    required this.userId,
+    required this.userName,
     required this.tutorSubject,
     required this.price,
+    required this.availableDays,
+    required this.availableTimeSlots,
   });
 
   @override
@@ -29,7 +40,6 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
   String selectedLevel = '';
   String selectedDate = '';
   String selectedTimeSlot = '';
-
   final TextEditingController dateController = TextEditingController();
 
   @override
@@ -68,17 +78,37 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
               ),
               readOnly: true,
               onTap: () async {
-                DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime(2101),
-                );
-                if (pickedDate != null) {
-                  setState(() {
-                    selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    dateController.text = selectedDate;
-                  });
+                try {
+                  // Find the next available date that matches one of the availableDays
+                  DateTime initialDate = DateTime.now();
+                  while (!widget.availableDays.any((availableDay) =>
+                      DateFormat('EEEE').format(initialDate).toLowerCase() ==
+                      availableDay.toLowerCase())) {
+                    initialDate = initialDate.add(Duration(days: 1));
+                  }
+
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: initialDate,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2101),
+                    selectableDayPredicate: (DateTime day) {
+                      String dayOfWeek =
+                          DateFormat('EEEE').format(day).toLowerCase();
+                      return widget.availableDays.any((availableDay) =>
+                          availableDay.toLowerCase() == dayOfWeek);
+                    },
+                  );
+
+                  if (pickedDate != null) {
+                    setState(() {
+                      selectedDate =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                      dateController.text = selectedDate;
+                    });
+                  }
+                } catch (e) {
+                  print("Error showing date picker: $e");
                 }
               },
             ),
@@ -90,16 +120,10 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
             const SizedBox(height: 10),
             Wrap(
               spacing: 10.0,
-              children: [
-                _timeSlotButton(context, '9:00am - 10:00am'),
-                _timeSlotButton(context, '10:00am - 11:00am'),
-                _timeSlotButton(context, '2:00pm - 3:00pm'),
-                _timeSlotButton(context, '3:00pm - 4:00pm'),
-                _timeSlotButton(context, '4:00pm - 5:00pm'),
-                _timeSlotButton(context, '5:00pm - 6:00pm'),
-                _timeSlotButton(context, '8:00pm - 9:00pm'),
-                _timeSlotButton(context, '9:00pm - 10:00pm'),
-              ],
+              children: widget.availableTimeSlots.map((slot) {
+                String timeSlot = _getTimeSlotString(slot);
+                return _timeSlotButton(context, timeSlot);
+              }).toList(),
             ),
             const SizedBox(height: 10),
             SizedBox(
@@ -129,7 +153,10 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                           date: selectedDate,
                           timeSlot: selectedTimeSlot,
                           bookingId: bookingId,
+                          tutorId: widget.tutorId,
                           tutorName: widget.tutorName,
+                          userId: widget.userId,
+                          userName: widget.userName,
                           tutorSubject: widget.tutorSubject,
                           price: widget.price,
                           isPast: false,
@@ -200,6 +227,29 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
               child: Text(level),
             ))
         .toList();
+  }
+
+  String _getTimeSlotString(int slot) {
+    switch (slot) {
+      case 0:
+        return '09:00am - 10:00am';
+      case 1:
+        return '10:00am - 11:00am';
+      case 2:
+        return '02:00pm - 03:00pm';
+      case 3:
+        return '03:00pm - 04:00pm';
+      case 4:
+        return '04:00pm - 05:00pm';
+      case 5:
+        return '07:00pm - 08:00pm';
+      case 6:
+        return '08:00pm - 09:00pm';
+      case 7:
+        return '09:00pm - 10:00pm';
+      default:
+        return '';
+    }
   }
 
   Widget _timeSlotButton(BuildContext context, String time) {
