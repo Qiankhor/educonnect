@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/chat_screen.dart';
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/primary_level/primary_level.dart';
@@ -8,7 +7,6 @@ import 'package:educonnect/search.dart';
 import 'package:educonnect/secondary_level/secondary_level.dart';
 import 'package:educonnect/tutor.dart';
 import 'package:educonnect/tutor_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 

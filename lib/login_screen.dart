@@ -1,8 +1,6 @@
-import 'package:educonnect/current_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/navigation_menu.dart';
-import 'package:educonnect/profile/profile_screen.dart';
 import 'package:educonnect/register_screen.dart';
-import 'package:educonnect/tutor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -80,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Password TextField
                     TextFormField(
                       controller: _passwordController,
-                      obscureText: true,
+                      obscureText: !_isPasswordVisible,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock),
                         hintText: 'Password',
@@ -89,6 +88,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
                         ),
                       ),
                       validator: (value) {
@@ -185,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => NavigationMenu()),
+            MaterialPageRoute(builder: (context) => const NavigationMenu()),
           );
         }
       } on FirebaseAuthException catch (e) {
@@ -215,18 +226,37 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _forgotPassword() {
+  void _forgotPassword() async {
     if (_emailController.text.isNotEmpty &&
         _emailController.text.contains('@')) {
-      FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
-      Fluttertoast.showToast(
-        msg: "Password reset email sent!",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-      );
+      // Check if the email exists in Firestore
+      final email = _emailController.text.trim();
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection(
+              'users') // Replace 'users' with the actual collection name
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Email exists in Firestore, send reset email
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        Fluttertoast.showToast(
+          msg: "Password reset email sent!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
+      } else {
+        // Email does not exist in Firestore
+        Fluttertoast.showToast(
+          msg: "Email not found. Please enter a registered email.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
     } else {
       Fluttertoast.showToast(
         msg: "Please enter a valid email to reset password",

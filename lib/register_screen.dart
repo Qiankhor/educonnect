@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -71,6 +72,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'role': isStudent ? 'Student' : 'Tutor',
       });
 
+      Fluttertoast.showToast(
+        msg: "Registration successful!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
       // Navigate to the login screen
       Navigator.pushReplacement(
         context,

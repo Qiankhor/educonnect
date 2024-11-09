@@ -127,6 +127,7 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
                         booking.isPending,
                         booking.isAccepted,
                         false, // No reschedule/cancel buttons for upcoming bookings
+                        false,
                         false, // Not a past booking
                       );
                     }).toList(),

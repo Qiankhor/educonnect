@@ -1,15 +1,12 @@
 import 'dart:convert';
-
 import 'package:educonnect/profile/edit_field_screen.dart';
 import 'package:educonnect/profile/support_queries_screen.dart';
 import 'package:educonnect/profile/tutor_profile/qualification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class TutorProfileScreen extends StatefulWidget {
@@ -212,9 +209,9 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
               _buildProfileListItem(
                   context, 'Phone Number', _phoneNumber ?? 'Loading...'),
               _buildProfileListItem(
-                  context, 'Teaching Level', _level ?? 'Loading...'),
+                  context, 'Teaching Level', _level ?? 'Select teaching level'),
               _buildProfileListItem(
-                  context, 'Subject', _subject ?? 'Loading...'),
+                  context, 'Subject', _subject ?? 'Select subject'),
               _buildProfileListItem(
                 context,
                 'Qualification',

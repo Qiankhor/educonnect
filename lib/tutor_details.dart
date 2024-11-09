@@ -26,9 +26,19 @@ class TutorDetails extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: NetworkImage(tutor.profileImageUrl),
+            Container(
+              width: 110, // Set width to twice the CircleAvatar radius
+              height: 110, // Set height to twice the CircleAvatar radius
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: tutor.profileImageUrl != null &&
+                          tutor.profileImageUrl!.isNotEmpty
+                      ? NetworkImage(tutor.profileImageUrl!) as ImageProvider
+                      : const AssetImage('assets/blank_profile.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             const SizedBox(height: 10),
             Text(

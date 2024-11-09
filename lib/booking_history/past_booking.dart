@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_history/booking_card.dart';
 import 'package:educonnect/booking_history/booking_model.dart';
@@ -53,21 +54,29 @@ class _PastBookingsState extends State<PastBookings> {
         List<String> bookedSessions =
             List<String>.from(userDoc.data()?['bookedSessions'] ?? []);
 
-        Query<Map<String, dynamic>> query = FirebaseFirestore.instance
-            .collection('bookings')
-            .where('bookingId', whereIn: bookedSessions); // Filter by bookingId
-
-        // Apply filters based on toggle buttons
         if (showCompleted) {
-          query = query.where('isCompleted', isEqualTo: true);
-        }
-        if (showCanceled) {
-          query = query.where('isCanceled',
-              isEqualTo: true); // Filter canceled bookings
-        }
+          // Stream only completed bookings
+          yield* FirebaseFirestore.instance
+              .collection('bookings')
+              .where('bookingId', whereIn: bookedSessions)
+              .where('isCompleted', isEqualTo: true)
+              .snapshots();
+        } else if (showCanceled) {
+          // Stream both canceled and rejected bookings
+          final canceledBookings = FirebaseFirestore.instance
+              .collection('bookings')
+              .where('bookingId', whereIn: bookedSessions)
+              .where('isCanceled', isEqualTo: true)
+              .snapshots();
 
-        yield* query
-            .snapshots(); // Firestore already returns the correct type, no need to cast.
+          final rejectedBookings = FirebaseFirestore.instance
+              .collection('bookings')
+              .where('bookingId', whereIn: bookedSessions)
+              .where('isRejected', isEqualTo: true)
+              .snapshots();
+
+          yield* StreamGroup.merge([canceledBookings, rejectedBookings]);
+        }
       }
     }
   }
@@ -153,6 +162,7 @@ class _PastBookingsState extends State<PastBookings> {
                         false,
                         booking.isCompleted,
                         booking.isCanceled,
+                        booking.isRejected,
                       );
                     }).toList(),
                   ),

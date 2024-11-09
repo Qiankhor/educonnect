@@ -5,7 +5,7 @@ class Tutor {
   final String gender;
   final String level;
   final String subject;
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final double? rating; // Change to nullable for flexibility
   final String education;
   final int experience;
@@ -28,7 +28,7 @@ class Tutor {
     required this.gender,
     required this.level,
     required this.subject,
-    required this.profileImageUrl,
+    this.profileImageUrl,
     this.rating, // Optional rating
     required this.education,
     required this.experience,

@@ -40,7 +40,7 @@ class TutorService {
             location: data['location'] ?? 'Unknown',
             subject: data['subject'] ?? 'Unknown',
             level: data['level'] ?? 'Unknown',
-            profileImageUrl: data['profileImageUrl'] ?? '',
+            profileImageUrl: data['profileImageUrl'],
             rating: data['rating'] != null
                 ? (data['rating'] as num).toDouble()
                 : null,

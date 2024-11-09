@@ -19,6 +19,7 @@ class SecondaryScreen extends StatefulWidget {
 class SecondaryScreenState extends State<SecondaryScreen> {
   String selectedFilter = 'All';
   List<Tutor> displayedTutors = [];
+  List<Tutor> allSecondaryTutors = [];
 
   @override
   void initState() {
@@ -31,9 +32,9 @@ class SecondaryScreenState extends State<SecondaryScreen> {
     TutorService tutorService = TutorService();
     List<Tutor> tutors = await tutorService.fetchTutors();
     setState(() {
-      // Filter tutors by primary level
-      displayedTutors =
+      allSecondaryTutors =
           tutors.where((tutor) => tutor.level == 'Secondary').toList();
+      displayedTutors = List.from(allSecondaryTutors);
     });
   }
 
@@ -42,10 +43,13 @@ class SecondaryScreenState extends State<SecondaryScreen> {
     setState(() {
       selectedFilter = filter;
       if (filter == 'All') {
-        fetchSecondaryTutors(); // Fetch again to reset the filter
-      } else {
         displayedTutors =
-            displayedTutors.where((tutor) => tutor.subject == filter).toList();
+            List.from(allSecondaryTutors); // Fetch again to reset the filter
+      } else {
+        displayedTutors = allSecondaryTutors
+            .where((tutor) =>
+                tutor.subject == filter) // Filter from allPrimaryTutors
+            .toList();
       }
     });
   }

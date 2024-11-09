@@ -121,7 +121,7 @@ class _QualificationScreenState extends State<QualificationScreen> {
       'location': locationController.text,
       'highestQualification': qualificationController.text,
       'institutionName': institutionController.text,
-      'yearOfGraduation': graduationYearController,
+      'yearOfGraduation': graduationYearController.text,
       'yearsOfExperience': int.tryParse(experienceYearsController.text) ?? 0,
       'about': aboutController.text,
       'availableDays': selectedDays,
@@ -347,14 +347,17 @@ class _QualificationScreenState extends State<QualificationScreen> {
               ].asMap().entries.map((entry) {
                 int index = entry.key;
                 String time = entry.value;
-                return ChoiceChip(
-                  label: Text(time),
-                  selected: selectedTimeSlots[index],
-                  onSelected: (selected) {
-                    setState(() {
-                      selectedTimeSlots[index] = selected;
-                    });
-                  },
+                return SizedBox(
+                  width: 180,
+                  child: ChoiceChip(
+                    label: Text(time),
+                    selected: selectedTimeSlots[index],
+                    onSelected: (selected) {
+                      setState(() {
+                        selectedTimeSlots[index] = selected;
+                      });
+                    },
+                  ),
                 );
               }).toList(),
             ),

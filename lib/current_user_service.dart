@@ -37,39 +37,4 @@ class UserService {
       return null;
     }
   }
-
-  // Add a new user to the database
-  Future<void> addUser(CurrentUser user) async {
-    try {
-      await _firestore.collection('users').doc(user.id).set({
-        'username': user.name,
-        'email': user.email,
-        'phone': user.phoneNumber,
-        'educationLevel': user.educationLevel,
-        'standardForm': user.standardForm,
-        'profileImageUrl': user.profileImageUrl,
-        'role': 'Student', // Adjust the role based on user type
-        'bookedSessions': user.bookedSessions,
-      });
-    } catch (e) {
-      print('Error adding user: $e');
-    }
-  }
-
-  // Update an existing user by ID
-  Future<void> updateUser(CurrentUser user) async {
-    try {
-      await _firestore.collection('users').doc(user.id).update({
-        'username': user.name,
-        'email': user.email,
-        'phone': user.phoneNumber,
-        'educationLevel': user.educationLevel,
-        'standardForm': user.standardForm,
-        'profileImageUrl': user.profileImageUrl,
-        'bookedSessions': user.bookedSessions,
-      });
-    } catch (e) {
-      print('Error updating user: $e');
-    }
-  }
 }

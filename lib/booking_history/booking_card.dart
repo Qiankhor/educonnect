@@ -21,6 +21,7 @@ Widget bookingCard(
   bool isAccepted,
   bool isCompleted,
   bool isCanceled,
+  bool isRejected,
 ) {
   return Card(
     elevation: 4,
