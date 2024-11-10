@@ -1,8 +1,8 @@
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor.dart';
+import 'package:educonnect/tutor_card.dart';
 import 'package:educonnect/tutor_service.dart';
 import 'package:flutter/material.dart';
-import 'primary_tutor_card.dart';
 import 'primary_filter_bar.dart';
 
 class PrimaryScreen extends StatefulWidget {
@@ -69,9 +69,10 @@ class PrimaryScreenState extends State<PrimaryScreen> {
               itemCount: displayedTutors.length,
               itemBuilder: (context, index) {
                 final tutor = displayedTutors[index];
-                return PrimaryTutorCard(
+                return TutorCard(
                   tutor: tutor,
                   currentUser: widget.currentUser,
+                  isPrimary: true,
                 );
               },
             ),

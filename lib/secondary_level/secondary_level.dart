@@ -1,7 +1,7 @@
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/secondary_level/secondary_filter_bar.dart';
-import 'package:educonnect/secondary_level/secondary_tutor_card.dart';
 import 'package:educonnect/tutor.dart';
+import 'package:educonnect/tutor_card.dart';
 import 'package:educonnect/tutor_service.dart';
 import 'package:flutter/material.dart';
 
@@ -69,9 +69,10 @@ class SecondaryScreenState extends State<SecondaryScreen> {
               itemCount: displayedTutors.length,
               itemBuilder: (context, index) {
                 final tutor = displayedTutors[index];
-                return SecondaryTutorCard(
+                return TutorCard(
                   tutor: tutor,
                   currentUser: widget.currentUser,
+                  isPrimary: false,
                 );
               },
             ),

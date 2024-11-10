@@ -1,8 +1,7 @@
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor.dart';
+import 'package:educonnect/tutor_card.dart';
 import 'package:flutter/material.dart';
-import 'primary_level/primary_tutor_card.dart';
-import 'secondary_level/secondary_tutor_card.dart';
 
 class SearchPage extends StatefulWidget {
   final List<Tutor> allTutors;
@@ -92,14 +91,16 @@ class _SearchPageState extends State<SearchPage> {
                 itemBuilder: (context, index) {
                   final tutor = _searchResultsTutor[index];
                   if (tutor.level == 'Primary') {
-                    return PrimaryTutorCard(
+                    return TutorCard(
                       tutor: tutor,
                       currentUser: widget.currentUser,
+                      isPrimary: true,
                     );
                   } else {
-                    return SecondaryTutorCard(
+                    return TutorCard(
                       tutor: tutor,
                       currentUser: widget.currentUser,
+                      isPrimary: false,
                     );
                   }
                 },
