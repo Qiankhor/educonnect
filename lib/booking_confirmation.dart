@@ -119,7 +119,6 @@ class BookingConfirmationPage extends StatelessWidget {
                               isAccepted: false,
                               isCompleted: false,
                               isCanceled: false,
-                              isRejected: false,
                             );
 
                             try {

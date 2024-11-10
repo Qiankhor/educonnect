@@ -63,19 +63,12 @@ class _PastBookingsState extends State<PastBookings> {
               .snapshots();
         } else if (showCanceled) {
           // Stream both canceled and rejected bookings
-          final canceledBookings = FirebaseFirestore.instance
+
+          yield* FirebaseFirestore.instance
               .collection('bookings')
               .where('bookingId', whereIn: bookedSessions)
               .where('isCanceled', isEqualTo: true)
               .snapshots();
-
-          final rejectedBookings = FirebaseFirestore.instance
-              .collection('bookings')
-              .where('bookingId', whereIn: bookedSessions)
-              .where('isRejected', isEqualTo: true)
-              .snapshots();
-
-          yield* StreamGroup.merge([canceledBookings, rejectedBookings]);
         }
       }
     }
@@ -162,7 +155,6 @@ class _PastBookingsState extends State<PastBookings> {
                         false,
                         booking.isCompleted,
                         booking.isCanceled,
-                        booking.isRejected,
                       );
                     }).toList(),
                   ),

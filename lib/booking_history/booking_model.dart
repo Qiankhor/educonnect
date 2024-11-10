@@ -16,7 +16,6 @@ class Booking {
   final bool isAccepted;
   final bool isCompleted;
   final bool isCanceled;
-  final bool isRejected;
 
   Booking({
     this.documentId,
@@ -34,7 +33,6 @@ class Booking {
     required this.isAccepted,
     required this.isCompleted,
     required this.isCanceled,
-    required this.isRejected,
   });
 
   // Factory constructor to create a Booking object from Firestore data
@@ -59,7 +57,6 @@ class Booking {
       isAccepted: data['isAccepted'] ?? false,
       isCompleted: data['isCompleted'] ?? false,
       isCanceled: data['isCanceled'] ?? false,
-      isRejected: data['isRejected'] ?? false,
     );
   }
   Map<String, dynamic> toFirestore() {
@@ -78,7 +75,6 @@ class Booking {
       'isAccepted': isAccepted,
       'isCompleted': isCompleted,
       'isCanceled': isCanceled,
-      'isRejected': isRejected,
     };
   }
 }

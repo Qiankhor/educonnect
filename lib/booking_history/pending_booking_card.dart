@@ -140,7 +140,7 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
                 Navigator.of(context).pop();
                 await _updateBookingStatus(
                     context, "Booking rejected successfully.", {
-                  'isRejected': true,
+                  'isCanceled': true,
                   'isPending': false,
                 });
               },
