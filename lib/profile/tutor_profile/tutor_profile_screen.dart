@@ -174,13 +174,26 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    _name ?? 'Loading...',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _name ?? 'Loading...',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.edit,
+                            color: Colors.black), // Edit icon
+                        onPressed: () {
+                          _navigateToEditScreen(
+                              'Username'); // Navigate to edit screen for Name
+                        },
+                      ),
+                    ],
                   ),
                   if (_qualificationStatus == 'Verified') ...[
                     const Row(
@@ -205,13 +218,14 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              _buildProfileListItem(context, 'Email', _email ?? 'Loading...'),
               _buildProfileListItem(
-                  context, 'Phone Number', _phoneNumber ?? 'Loading...'),
+                  context, 'Email', _email ?? 'Loading...', false),
               _buildProfileListItem(
-                  context, 'Teaching Level', _level ?? 'Select teaching level'),
+                  context, 'Phone Number', _phoneNumber ?? 'Loading...', true),
+              _buildProfileListItem(context, 'Teaching Level',
+                  _level ?? 'Select teaching level', true),
               _buildProfileListItem(
-                  context, 'Subject', _subject ?? 'Select subject'),
+                  context, 'Subject', _subject ?? 'Select subject', true),
               _buildProfileListItem(
                 context,
                 'Qualification',
@@ -220,9 +234,10 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
                     : _qualificationStatus == 'Verified'
                         ? 'Verified'
                         : 'Not Set',
+                true,
               ),
               _buildProfileListItem(
-                  context, 'Payment Method', _paymentMethod ?? 'Not Set'),
+                  context, 'Payment Method', _paymentMethod ?? 'Not Set', true),
               _buildSupportQueriesSection(),
             ],
           ),
@@ -232,7 +247,7 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
   }
 
   Widget _buildProfileListItem(
-      BuildContext context, String title, String subtitle) {
+      BuildContext context, String title, String subtitle, bool editable) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: ListTile(
@@ -250,12 +265,11 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
               : subtitle,
           style: TextStyle(fontSize: 14, color: Colors.grey[600]),
         ),
-        trailing:
-            Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16),
+        trailing: editable
+            ? Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16)
+            : null, // Conditionally show arrow based on 'editable'
         onTap: () {
-          if (title == 'Email' ||
-              title == 'Phone Number' ||
-              title == 'Qualification') {
+          if (title == 'Phone Number' || title == 'Qualification') {
             _navigateToEditScreen(title);
           } else if (title == 'Teaching Level') {
             _showTeachingLevelBottomSheet();

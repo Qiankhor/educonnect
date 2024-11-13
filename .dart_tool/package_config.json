@@ -2,10 +2,22 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "_discoveryapis_commons",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/_discoveryapis_commons-1.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.44",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.45",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "async",
@@ -33,19 +45,19 @@
     },
     {
       "name": "cloud_firestore",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-5.4.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-5.4.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.4.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.4.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-4.3.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-4.3.3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -60,6 +72,12 @@
       "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.4+2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "cupertino_icons",
@@ -105,61 +123,61 @@
     },
     {
       "name": "firebase_analytics",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics-11.3.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics-11.3.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_analytics_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_platform_interface-4.2.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_platform_interface-4.2.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_analytics_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_web-0.5.10+2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_web-0.5.10+3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_app_check",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check-0.3.1+4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check-0.3.1+5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_app_check_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_platform_interface-0.1.0+38",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_platform_interface-0.1.0+39",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_app_check_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_web-0.2.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_web-0.2.0+1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.3.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.7",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.8",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.13.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.13.3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-3.6.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-3.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -177,19 +195,19 @@
     },
     {
       "name": "firebase_storage",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage-12.3.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage-12.3.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.31",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.32",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_web-3.10.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_web-3.10.4",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -240,6 +258,54 @@
       "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/get_storage-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
+    },
+    {
+      "name": "google_identity_services_web",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_identity_services_web-0.3.1+5",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "google_sign_in",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in-6.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "google_sign_in_android",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.33",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_ios-5.7.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_platform_interface-2.4.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_web-0.12.4+3",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "googleapis",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/googleapis-13.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "googleapis_auth",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/googleapis_auth-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "http",
@@ -375,9 +441,9 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.1.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.1.5",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.4"
     },
     {
       "name": "path_provider_android",
@@ -483,7 +549,7 @@
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.13",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.14",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -554,10 +620,10 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-11-10T04:05:03.047678Z",
+  "generated": "2024-11-11T16:08:57.929425Z",
   "generator": "pub",
-  "generatorVersion": "3.5.3",
+  "generatorVersion": "3.5.4",
   "flutterRoot": "file:///C:/Users/yiqia/dev/flutter",
-  "flutterVersion": "3.24.3",
+  "flutterVersion": "3.24.4",
   "pubCache": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache"
 }

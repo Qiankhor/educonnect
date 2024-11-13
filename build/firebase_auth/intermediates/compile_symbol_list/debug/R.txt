@@ -314,6 +314,7 @@ int style TextAppearance_Compat_Notification_Line2 0x0
 int style TextAppearance_Compat_Notification_Time 0x0
 int style TextAppearance_Compat_Notification_Title 0x0
 int style Theme_Hidden 0x0
+int style Theme_PlayCore_Transparent 0x0
 int style Widget_Compat_NotificationActionContainer 0x0
 int style Widget_Compat_NotificationActionText 0x0
 int style Widget_Support_CoordinatorLayout 0x0

@@ -11,7 +11,7 @@ class QualificationScreen extends StatefulWidget {
 class _QualificationScreenState extends State<QualificationScreen> {
   String? selectedGender;
   List<String> selectedDays = [];
-  List<bool> selectedTimeSlots = List.generate(8, (_) => false);
+  List<bool> selectedTimeSlots = List.generate(10, (_) => false);
   final TextEditingController nameController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -93,7 +93,7 @@ class _QualificationScreenState extends State<QualificationScreen> {
           selectedDays = List<String>.from(data['availableDays'] ?? []);
           List<dynamic> timeSlots = data['availableTimeSlots'] ?? [];
           selectedTimeSlots =
-              List.generate(8, (index) => timeSlots.contains(index));
+              List.generate(10, (index) => timeSlots.contains(index));
           isUpdating = true; // Update button label to "Update"
         });
       }
@@ -336,14 +336,16 @@ class _QualificationScreenState extends State<QualificationScreen> {
               spacing: 8.0,
               runSpacing: 4.0,
               children: [
-                '09:00 am - 10:00 am',
-                '10:00 am - 11:00 am',
-                '02:00 pm - 03:00 pm',
-                '03:00 pm - 04:00 pm',
-                '04:00 pm - 05:00 pm',
-                '07:00 pm - 08:00 pm',
-                '08:00 pm - 09:00 pm',
-                '09:00 pm - 10:00 pm',
+                '09:00 AM - 10:00 PM',
+                '10:00 AM - 11:00 PM',
+                '11:00 AM - 12:00 PM',
+                '02:00 PM - 03:00 PM',
+                '03:00 PM - 04:00 PM',
+                '04:00 PM - 05:00 PM',
+                '05:00 PM - 06:00 PM',
+                '07:00 PM - 08:00 PM',
+                '08:00 PM - 09:00 PM',
+                '09:00 PM - 10:00 PM',
               ].asMap().entries.map((entry) {
                 int index = entry.key;
                 String time = entry.value;

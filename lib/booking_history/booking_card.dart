@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:educonnect/booking_history/accepted_booking_card.dart';
 import 'package:educonnect/booking_history/canceled_booking_card.dart';
+import 'package:educonnect/booking_history/completed_booking_card.dart';
 import 'package:educonnect/booking_history/pending_booking_card.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget bookingCard(
   BuildContext context,
@@ -32,50 +35,10 @@ Widget bookingCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Tutor Name or Student Name with Message Icon in the Same Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  // Fetch current user ID and determine their role
-                  FutureBuilder<String>(
-                    future: _getUserRole(userId, tutorId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text("Error: ${snapshot.error}");
-                      } else if (snapshot.hasData) {
-                        String role = snapshot.data ?? "Unknown";
-                        // Choose the appropriate name based on the role
-                        String displayName =
-                            (role == "Student") ? tutorName : userName;
-                        return Text(
-                          displayName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 79, 101, 241),
-                          ),
-                        );
-                      } else {
-                        return const Text("Unknown Role");
-                      }
-                    },
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // Navigate to chat (Add your chat navigation logic here)
-                    },
-                    icon: const Icon(
-                      Icons.message,
-                      color: Color.fromARGB(255, 79, 101, 241),
-                      size: 20,
-                    ),
-                  ),
-                ],
-              ),
+              _buildUserRoleDisplay(userId, tutorId, userName, tutorName),
               Text(
                 'RM${rate.toStringAsFixed(0)}/hour',
                 style: const TextStyle(
@@ -89,27 +52,15 @@ Widget bookingCard(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                subject,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-              ),
-              Text(
-                date,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-              ),
+              Text(subject, style: const TextStyle(fontSize: 15)),
+              Text(date, style: const TextStyle(fontSize: 15)),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                level,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-              ),
-              Text(
-                time,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-              ),
+              Text(level, style: const TextStyle(fontSize: 15)),
+              Text(time, style: const TextStyle(fontSize: 15)),
             ],
           ),
           const SizedBox(height: 10),
@@ -142,15 +93,20 @@ Widget bookingCard(
                   bookingId: bookingId,
                   tutorId: tutorId,
                 )
-              else
-                ElevatedButton(
-                  onPressed: () {
-                    // Join the meeting logic
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
-                  ),
-                  child: const Text("Join the meeting"),
+              else if (isAccepted)
+                AcceptedBookingCard(bookingId: bookingId)
+              else if (isCompleted)
+                CompletedBookingCard(
+                  level: level,
+                  date: date,
+                  time: time,
+                  bookingId: bookingId,
+                  tutorId: tutorId,
+                  tutorName: tutorName,
+                  userId: userId,
+                  userName: userName,
+                  subject: subject,
+                  rate: rate,
                 ),
             ],
           ),
@@ -160,16 +116,50 @@ Widget bookingCard(
   );
 }
 
-// Function to get current user's role by comparing their ID
+Widget _buildUserRoleDisplay(
+    String userId, String tutorId, String userName, String tutorName) {
+  return FutureBuilder<String>(
+    future: _getUserRole(userId, tutorId),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const CircularProgressIndicator();
+      } else if (snapshot.hasError) {
+        return const Text("Error loading role");
+      } else {
+        String role = snapshot.data ?? "Unknown";
+        String displayName = role == "Student" ? tutorName : userName;
+        return Row(
+          children: [
+            Text(
+              displayName,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 79, 101, 241),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                // TODO: Navigate to chat feature
+              },
+              icon: const Icon(
+                Icons.message,
+                color: Color.fromARGB(255, 79, 101, 241),
+                size: 20,
+              ),
+            ),
+          ],
+        );
+      }
+    },
+  );
+}
+
 Future<String> _getUserRole(String userId, String tutorId) async {
   final currentUserId = FirebaseAuth.instance.currentUser?.uid;
-  if (currentUserId == userId) {
-    return "Student"; // Current user is the student
-  } else if (currentUserId == tutorId) {
-    return "Tutor"; // Current user is the tutor
-  } else {
-    return "Unknown"; // If for some reason the current user is neither
-  }
+  if (currentUserId == userId) return "Student";
+  if (currentUserId == tutorId) return "Tutor";
+  return "Unknown";
 }
 
 Future<String?> _fetchTutorNameFromBookingId(String bookingId) async {
@@ -201,5 +191,29 @@ Future<String?> _fetchStudentNameFromBookingId(String bookingId) async {
   } catch (e) {
     print("Error fetching student name: $e");
     return null;
+  }
+}
+
+Future<void> _updateBookingStatusToCompleted(String bookingId) async {
+  try {
+    // Get the booking document reference
+    DocumentReference bookingRef =
+        FirebaseFirestore.instance.collection('bookings').doc(bookingId);
+
+    // Update the booking status to completed
+    await bookingRef.update({
+      'isCompleted': true,
+    });
+
+    Fluttertoast.showToast(
+      msg: "Booking status updated to completed.",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  } catch (e) {
+    print('Error updating booking status: $e');
   }
 }

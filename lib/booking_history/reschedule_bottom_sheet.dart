@@ -245,21 +245,25 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
   String _getTimeSlotString(int slot) {
     switch (slot) {
       case 0:
-        return '09:00am - 10:00am';
+        return '09:00AM - 10:00AM';
       case 1:
-        return '10:00am - 11:00am';
+        return '10:00AM - 11:00AM';
       case 2:
-        return '02:00pm - 03:00pm';
+        return '11:00AM - 12:00PM';
       case 3:
-        return '03:00pm - 04:00pm';
+        return '02:00PM - 03:00PM';
       case 4:
-        return '04:00pm - 05:00pm';
+        return '03:00PM - 04:00PM';
       case 5:
-        return '07:00pm - 08:00pm';
+        return '04:00PM - 05:00PM';
       case 6:
-        return '08:00pm - 09:00pm';
+        return '05:00PM - 06:00PM';
       case 7:
-        return '09:00pm - 10:00pm';
+        return '07:00PM - 08:00PM';
+      case 8:
+        return '08:00PM - 09:00PM';
+      case 9:
+        return '09:00PM - 10:00PM';
       default:
         return '';
     }

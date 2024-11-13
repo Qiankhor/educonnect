@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="default_web_client_id" translatable="false">865014841760-ngjbo9310f4f48ppj2r3pgddt4f9bv6u.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://educonnect-410d6-default-rtdb.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">865014841760</string>
     <string name="google_api_key" translatable="false">AIzaSyA7mUBkc2n8LBxcoLnPXNlrNF9oRfDsvFk</string>
     <string name="google_app_id" translatable="false">1:865014841760:android:e427e8517526f3af0fe4c5</string>

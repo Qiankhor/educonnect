@@ -30,6 +30,8 @@ class EditFieldScreen extends StatelessWidget {
         return 'email';
       case 'Phone Number':
         return 'phone';
+      case 'Username':
+        return 'username';
       default:
         return field;
     }

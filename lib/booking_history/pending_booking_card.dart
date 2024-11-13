@@ -96,11 +96,7 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
             if (role == "Student") {
               _openRescheduleBottomSheet(context);
             } else if (role == "Tutor") {
-              await _updateBookingStatus(
-                  context, "Booking accepted successfully.", {
-                'isAccepted': true,
-                'isPending': false,
-              });
+              _showMeetingLinkDialog(context);
             }
           },
         ),
@@ -243,6 +239,50 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
         fontSize: 16.0,
       );
     }
+  }
+
+  Future<void> _showMeetingLinkDialog(BuildContext context) async {
+    TextEditingController linkController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Enter Meeting Link'),
+          content: TextField(
+            controller: linkController,
+            decoration:
+                const InputDecoration(hintText: 'Paste your meeting link here'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                String link = linkController.text;
+                if (link.isNotEmpty) {
+                  await _updateBookingStatus(
+                      context, "Booking accepted successfully.", {
+                    'isAccepted': true,
+                    'isPending': false,
+                    'meetingLink': link,
+                  });
+                } else {
+                  Fluttertoast.showToast(
+                    msg: "Please enter a valid meeting link.",
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                  );
+                }
+                Navigator.of(context).pop();
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _updateBookingStatus(BuildContext context, String successMessage,

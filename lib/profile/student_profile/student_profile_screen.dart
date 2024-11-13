@@ -173,23 +173,38 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                _name ?? 'Loading...',
-                style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _name ?? 'Loading...',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit,
+                        color: Colors.black), // Edit icon
+                    onPressed: () {
+                      _navigateToEditScreen(
+                          'Username'); // Navigate to edit screen for Name
+                    },
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
-              _buildProfileListItem(context, 'Email', _email ?? 'Loading...'),
               _buildProfileListItem(
-                  context, 'Phone Number', _phoneNumber ?? 'Loading...'),
+                  context, 'Email', _email ?? 'Loading...', false),
+              _buildProfileListItem(
+                  context, 'Phone Number', _phoneNumber ?? 'Loading...', true),
               _buildProfileListItem(context, 'Education Level',
-                  _educationLevel ?? 'Set Education Level'),
+                  _educationLevel ?? 'Set Education Level', true),
               _buildProfileListItem(context, 'Standard/Form',
-                  _standardForm ?? 'Set Standard/Form'),
+                  _standardForm ?? 'Set Standard/Form', true),
               _buildProfileListItem(context, 'Payment Method',
-                  _paymentMethod ?? 'Set Payment Method'),
+                  _paymentMethod ?? 'Set Payment Method', true),
               _buildSection(
                   'Progress Tracking', const ProgressTrackingScreen()),
               _buildSection('Online Learning Resources',
@@ -204,7 +219,11 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
   }
 
   Widget _buildProfileListItem(
-      BuildContext context, String title, String subtitle) {
+    BuildContext context,
+    String title,
+    String subtitle,
+    bool editable, // Added the editable parameter
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: ListTile(
@@ -220,17 +239,18 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
           subtitle,
           style: TextStyle(fontSize: 14, color: Colors.grey[600]),
         ),
-        trailing:
-            Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16),
+        trailing: editable
+            ? Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16)
+            : null, // Conditionally show arrow based on 'editable'
         onTap: () {
-          if (title == 'Email' ||
-              title == 'Phone Number' ||
-              title == 'Payment Method') {
-            _navigateToEditScreen(title);
-          } else if (title == 'Education Level') {
-            _showEducationLevelBottomSheet();
-          } else if (title == 'Standard/Form') {
-            _showStandardFormBottomSheet();
+          if (editable) {
+            if (title == 'Phone Number' || title == 'Payment Method') {
+              _navigateToEditScreen(title);
+            } else if (title == 'Education Level') {
+              _showEducationLevelBottomSheet();
+            } else if (title == 'Standard/Form') {
+              _showStandardFormBottomSheet();
+            }
           }
         },
       ),
