@@ -79,7 +79,6 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
         String? meetingLink = bookingDoc['meetingLink'];
         String dateStr = bookingDoc['date'];
         String timeStr = bookingDoc['time'];
-        DateTime bookingDate = DateTime.parse(dateStr);
 
         List<String> timeParts = timeStr.split(' - ');
         if (timeParts.length == 2) {
@@ -87,19 +86,13 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
               _parseBookingTime(dateStr, timeParts[0].trim());
           DateTime bookingEndTime =
               _parseBookingTime(dateStr, timeParts[1].trim());
-          print(bookingEndTime);
-          DateTime currentTimeInMYT = _getCurrentTimeInMYT();
-          if (currentTimeInMYT.day > bookingDate.day) {
-            await _updateBookingStatus(bookingDoc.id);
-          }
+
+          DateTime currentTimeInMYT = DateTime.now();
+
           // If the current date is the same as the booking date, check the time
-          else if (currentTimeInMYT.year == bookingDate.year &&
-              currentTimeInMYT.month == bookingDate.month &&
-              currentTimeInMYT.day == bookingDate.day) {
-            // Update status if current time is past the booking end time
-            if (currentTimeInMYT.isAfter(bookingEndTime)) {
-              await _updateBookingStatus(bookingDoc.id);
-            }
+
+          if (currentTimeInMYT.isAfter(bookingEndTime)) {
+            await _updateBookingStatus(bookingDoc.id);
           }
 
           if (currentTimeInMYT.isAfter(bookingStartTime) &&
@@ -112,12 +105,6 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
       print('Error retrieving meeting link: $e');
     }
     return null;
-  }
-
-  DateTime _getCurrentTimeInMYT() {
-    DateTime utcTime = DateTime.now().toUtc();
-    Duration mytOffset = Duration(hours: 8);
-    return utcTime.add(mytOffset);
   }
 
   DateTime _parseBookingTime(String dateStr, String timeStr) {

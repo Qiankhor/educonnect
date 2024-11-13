@@ -1,7 +1,7 @@
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor.dart';
 import 'package:educonnect/tutor_card.dart';
-import 'package:educonnect/tutor_service.dart';
+import 'package:educonnect/services/tutor_service.dart';
 import 'package:flutter/material.dart';
 import 'primary_filter_bar.dart';
 

@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.educonnect.app-mergeDebugResources-34:/values-in/values-in.xml",
+            "outputFile": "com.example.educonnect.app-mergeDebugResources-37:/values-in/values-in.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\1f74e4cf59888b0c4aa71346bdc90603\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-in\\values.xml",
+                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\3fdd25d683ed8ab2c5055acd9c21d10c\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-in\\values-in.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,164",
+                        "endColumns": "108,117",
+                        "endOffsets": "159,277"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\49f2382ba4a0accc9343b79f0a55d514\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-in\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,24 +31,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\80b54f1d5712cdc5379b405e45dbb8a9\\transformed\\browser-1.8.0\\res\\values-in\\values-in.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,155,253,362",
-                        "endColumns": "99,97,108,100",
-                        "endOffsets": "150,248,357,458"
-                    },
-                    "to": {
-                        "startLines": "29,30,31,32",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3213,3313,3411,3520",
-                        "endColumns": "99,97,108,100",
-                        "endOffsets": "3308,3406,3515,3616"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\17bbb45177015e5c796e74663429ce0d\\transformed\\core-1.13.1\\res\\values-in\\values-in.xml",
+                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\966923b1aeaeffb6f1fde0509faed90d\\transformed\\core-1.13.1\\res\\values-in\\values-in.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -55,17 +48,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\9579afd7a6cb29dc05aa6d51422eb929\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-in\\values-in.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,164",
-                        "endColumns": "108,117",
-                        "endOffsets": "159,277"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\617d420ee65b4e653ce38a5a0513f2b7\\transformed\\jetified-play-services-base-18.5.0\\res\\values-in\\values.xml",
+                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\102961b0a1a372dec306e445c60eaea7\\transformed\\jetified-play-services-base-18.5.0\\res\\values-in\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -79,6 +62,23 @@
                         "startOffsets": "1012,1119,1283,1409,1515,1670,1797,1912,2150,2316,2421,2585,2711,2866,3010,3074,3134",
                         "endColumns": "106,163,125,105,154,126,114,105,165,104,163,125,154,143,63,59,78",
                         "endOffsets": "1114,1278,1404,1510,1665,1792,1907,2013,2311,2416,2580,2706,2861,3005,3069,3129,3208"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\yiqia\\.gradle\\caches\\transforms-3\\a7140e4287cd3977ef60652a9677800d\\transformed\\browser-1.8.0\\res\\values-in\\values-in.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,155,253,362",
+                        "endColumns": "99,97,108,100",
+                        "endOffsets": "150,248,357,458"
+                    },
+                    "to": {
+                        "startLines": "29,30,31,32",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3213,3313,3411,3520",
+                        "endColumns": "99,97,108,100",
+                        "endOffsets": "3308,3406,3515,3616"
                     }
                 }
             ]

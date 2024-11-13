@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+ 
 <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
     <string name="google_api_key">AIzaSyA7mUBkc2n8LBxcoLnPXNlrNF9oRfDsvFk</string>
     <string name="firebase_database_url">https://educonnect-410d6-default-rtdb.firebaseio.com/</string>
-    <string name="gcm_defaultSenderId">YOUR_SENDER_ID</string>
+    <string name="gcm_defaultSenderId">865014841760</string>
     <string name="project_id">educonnect-410d6</string>
     <string name="application_id">1:865014841760:android:e427e8517526f3af0fe4c5</string>
     

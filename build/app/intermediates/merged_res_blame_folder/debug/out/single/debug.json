@@ -1,26 +1,26 @@
 [
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.educonnect.app-main-30:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\drawable-v21_launch_background.xml.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\drawable-v21\\launch_background.xml"
     },
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.example.educonnect.app-main-30:/mipmap-hdpi/ic_launcher.png"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.example.educonnect.app-main-30:/mipmap-mdpi/ic_launcher.png"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/drawable-v21_launch_background.xml.flat",
-        "source": "com.example.educonnect.app-main-30:/drawable-v21/launch_background.xml"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.example.educonnect.app-main-30:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.example.educonnect.app-merged_res-36:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.educonnect.app-main-30:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-merged_res-39:\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\yiqia\\.gradle\\daemon\\8.0.2\\com.example.educonnect.app-main-33:\\mipmap-xxxhdpi\\ic_launcher.png"
     }
 ]

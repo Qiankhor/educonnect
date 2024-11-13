@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/navigation_menu.dart';
 import 'package:educonnect/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -187,10 +188,24 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       try {
         // Sign in the user with Firebase Authentication
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+
+        FirebaseMessaging messaging = FirebaseMessaging.instance;
+        String? fcmToken = await messaging.getToken();
+
+        if (fcmToken != null) {
+          // Update the FCM token in Firestore
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userCredential.user!.uid)
+              .update({
+            'token': fcmToken, // Store the FCM token in the user's document
+          });
+        }
 
         // Navigate to the ProfileScreen after login
         if (mounted) {

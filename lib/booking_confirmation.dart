@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_history/booking_model.dart';
 import 'package:educonnect/current_user.dart';
-import 'package:educonnect/current_user_service.dart';
+import 'package:educonnect/services/current_user_service.dart';
+import 'package:educonnect/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -157,6 +158,22 @@ class BookingConfirmationPage extends StatelessWidget {
                                 'bookedSessions':
                                     FieldValue.arrayUnion([bookingId])
                               });
+
+                              DocumentSnapshot tutorSnapshot =
+                                  await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(tutorId)
+                                      .get();
+                              String deviceToken = tutorSnapshot['token'];
+
+                              // Send notification to tutor
+                              await NotificationService.sendNotificationToTutor(
+                                  deviceToken,
+                                  context,
+                                  bookingId,
+                                  date,
+                                  timeSlot,
+                                  currentUserName);
 
                               Fluttertoast.showToast(
                                 msg: "Your booking is successful!",

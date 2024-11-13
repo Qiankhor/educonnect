@@ -6,7 +6,7 @@ import 'package:educonnect/booking_history/schedule_screen.dart';
 import 'package:educonnect/search.dart';
 import 'package:educonnect/secondary_level/secondary_level.dart';
 import 'package:educonnect/tutor.dart';
-import 'package:educonnect/tutor_service.dart';
+import 'package:educonnect/services/tutor_service.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 

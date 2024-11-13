@@ -1,9 +1,9 @@
 import 'package:educonnect/chat_screen.dart';
-import 'package:educonnect/current_user_service.dart';
+import 'package:educonnect/services/current_user_service.dart';
 import 'package:educonnect/home.dart';
 import 'package:educonnect/booking_history/schedule_screen.dart';
 import 'package:educonnect/profile/profile_screen.dart';
-import 'package:educonnect/tutor_service.dart';
+import 'package:educonnect/services/tutor_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

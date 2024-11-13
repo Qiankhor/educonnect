@@ -193,27 +193,3 @@ Future<String?> _fetchStudentNameFromBookingId(String bookingId) async {
     return null;
   }
 }
-
-Future<void> _updateBookingStatusToCompleted(String bookingId) async {
-  try {
-    // Get the booking document reference
-    DocumentReference bookingRef =
-        FirebaseFirestore.instance.collection('bookings').doc(bookingId);
-
-    // Update the booking status to completed
-    await bookingRef.update({
-      'isCompleted': true,
-    });
-
-    Fluttertoast.showToast(
-      msg: "Booking status updated to completed.",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.green,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  } catch (e) {
-    print('Error updating booking status: $e');
-  }
-}

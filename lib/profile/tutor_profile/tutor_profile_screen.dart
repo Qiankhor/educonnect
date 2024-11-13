@@ -104,6 +104,8 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
 
       if (response.statusCode == 200) {
         var responseData = await http.Response.fromStream(response);
+        print(
+            'Response body: ${responseData.body}'); // Add this line for debugging
         var data = jsonDecode(responseData.body);
         String imageUrl = data['imageUrl'];
 
@@ -118,7 +120,8 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
           });
         }
       } else {
-        print('Failed to upload image: ${response.statusCode}');
+        print(
+            'Failed to upload image: ${response.statusCode}'); // Add this line to check response details
         Fluttertoast.showToast(
           msg: "Failed to upload image. Status code: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
