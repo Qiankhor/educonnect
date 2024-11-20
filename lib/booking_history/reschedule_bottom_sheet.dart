@@ -1,3 +1,4 @@
+import 'package:educonnect/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,6 +13,8 @@ class RescheduleBottomSheet extends StatefulWidget {
   final List<String> availableDays; // e.g., ["Friday", "Thursday", "Wednesday"]
   final List<int> availableTimeSlots;
   final String bookingId;
+  final String deviceToken;
+  final String currentUserName;
 
   const RescheduleBottomSheet({
     super.key,
@@ -24,6 +27,8 @@ class RescheduleBottomSheet extends StatefulWidget {
     required this.availableDays,
     required this.availableTimeSlots,
     required this.bookingId,
+    required this.deviceToken,
+    required this.currentUserName,
   });
 
   @override
@@ -165,7 +170,7 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (selectedLevel.isEmpty ||
                       selectedDate.isEmpty ||
                       selectedTimeSlot.isEmpty) {
@@ -176,6 +181,18 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                     Navigator.pop(context);
                     widget.onRescheduleConfirm(
                         selectedLevel, selectedDate, selectedTimeSlot);
+
+                    await NotificationService.sendNotificationToTutor(
+                      widget.deviceToken,
+                      context,
+                      widget.bookingId,
+                      selectedDate,
+                      selectedTimeSlot,
+                      widget.currentUserName,
+                      false,
+                      true,
+                      false,
+                    );
                   }
                 },
                 child: const Text(

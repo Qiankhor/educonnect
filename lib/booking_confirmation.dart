@@ -123,6 +123,24 @@ class BookingConfirmationPage extends StatelessWidget {
                             );
 
                             try {
+                              DocumentSnapshot tutorSnapshot =
+                                  await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(tutorId)
+                                      .get();
+                              String deviceToken = tutorSnapshot['token'];
+
+                              // Send notification to tutor
+                              await NotificationService.sendNotificationToTutor(
+                                  deviceToken,
+                                  context,
+                                  bookingId,
+                                  date,
+                                  timeSlot,
+                                  currentUserName,
+                                  true,
+                                  false,
+                                  false);
                               // Add booking to the 'bookings' collection
                               await FirebaseFirestore.instance
                                   .collection('bookings')
@@ -158,22 +176,6 @@ class BookingConfirmationPage extends StatelessWidget {
                                 'bookedSessions':
                                     FieldValue.arrayUnion([bookingId])
                               });
-
-                              DocumentSnapshot tutorSnapshot =
-                                  await FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(tutorId)
-                                      .get();
-                              String deviceToken = tutorSnapshot['token'];
-
-                              // Send notification to tutor
-                              await NotificationService.sendNotificationToTutor(
-                                  deviceToken,
-                                  context,
-                                  bookingId,
-                                  date,
-                                  timeSlot,
-                                  currentUserName);
 
                               Fluttertoast.showToast(
                                 msg: "Your booking is successful!",

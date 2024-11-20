@@ -92,6 +92,7 @@ Widget bookingCard(
                   rate: rate,
                   bookingId: bookingId,
                   tutorId: tutorId,
+                  userId: userId,
                 )
               else if (isAccepted)
                 AcceptedBookingCard(bookingId: bookingId)

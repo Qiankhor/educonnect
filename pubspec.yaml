@@ -29,7 +29,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   google_sign_in: ^6.2.2
   firebase_messaging: ^15.1.4
-  flutter_local_notifications: ^18.0.1
+  flutter_pannable_rating_bar: ^2.7.2+1
 
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.6

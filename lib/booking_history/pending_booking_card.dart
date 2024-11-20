@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_history/reschedule_bottom_sheet.dart';
+import 'package:educonnect/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,6 +16,7 @@ class PendingBookingCard extends StatefulWidget {
   final double rate;
   final String bookingId;
   final String tutorId;
+  final String userId;
 
   const PendingBookingCard({
     super.key,
@@ -28,6 +30,7 @@ class PendingBookingCard extends StatefulWidget {
     required this.rate,
     required this.bookingId,
     required this.tutorId,
+    required this.userId,
   });
 
   @override
@@ -133,6 +136,22 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
             ),
             TextButton(
               onPressed: () async {
+                DocumentSnapshot userDoc = await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.userId)
+                    .get();
+
+                String deviceToken = userDoc['token'];
+
+                await NotificationService.sendNotificationToStudent(
+                    deviceToken,
+                    context,
+                    widget.bookingId,
+                    widget.date,
+                    widget.time,
+                    widget.tutorName,
+                    false,
+                    true);
                 Navigator.of(context).pop();
                 await _updateBookingStatus(
                     context, "Booking rejected successfully.", {
@@ -168,6 +187,25 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
                   'isCanceled': true,
                   'isPending': false,
                 });
+
+                DocumentSnapshot userDoc = await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.tutorId)
+                    .get();
+
+                String deviceToken = userDoc['token'];
+
+                await NotificationService.sendNotificationToTutor(
+                  deviceToken,
+                  context,
+                  widget.bookingId,
+                  widget.date,
+                  widget.time,
+                  widget.userName,
+                  false,
+                  false,
+                  true,
+                );
               },
               child: const Text('Yes'),
             ),
@@ -182,6 +220,11 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
       // Fetch the tutor's details from Firestore
       DocumentSnapshot tutorDoc = await FirebaseFirestore.instance
           .collection('qualifications')
+          .doc(widget.tutorId)
+          .get();
+
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
           .doc(widget.tutorId)
           .get();
 
@@ -202,6 +245,7 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
       List<String> availableDays = List<String>.from(tutorDoc['availableDays']);
       List<int> availableTimeSlots =
           List<int>.from(tutorDoc['availableTimeSlots']);
+      String deviceToken = userDoc['token'];
 
       // Show the RescheduleBottomSheet with the fetched data
       showModalBottomSheet(
@@ -226,6 +270,8 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
             bookingId: widget.bookingId,
             initialDate: widget.date,
             initialTimeSlot: widget.time,
+            deviceToken: deviceToken,
+            currentUserName: widget.userName,
           );
         },
       );
@@ -260,6 +306,22 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
             ),
             TextButton(
               onPressed: () async {
+                DocumentSnapshot userDoc = await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.userId)
+                    .get();
+
+                String deviceToken = userDoc['token'];
+
+                NotificationService.sendNotificationToStudent(
+                    deviceToken,
+                    context,
+                    widget.bookingId,
+                    widget.date,
+                    widget.time,
+                    widget.tutorName,
+                    true,
+                    false);
                 String link = linkController.text;
                 if (link.isNotEmpty) {
                   await _updateBookingStatus(

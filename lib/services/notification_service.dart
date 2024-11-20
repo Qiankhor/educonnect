@@ -52,16 +52,31 @@ class NotificationService {
       String bookingId,
       String date,
       String timeSlot,
-      String currentUserName) async {
+      String currentUserName,
+      bool isBooking,
+      bool isRescheduling,
+      bool isCancelling) async {
     final String serverAccessTokenKey = await getAccessToken();
     String endPointFirebaseCloudMessaging =
         'https://fcm.googleapis.com/v1/projects/educonnect-410d6/messages:send';
+
+    String title;
+    if (isBooking) {
+      title = "Booking Request from $currentUserName";
+    } else if (isRescheduling) {
+      title = "Rescheduling from $currentUserName";
+    } else if (isCancelling) {
+      title = "Booking Cancellation from $currentUserName";
+    } else {
+      title =
+          "Notification from $currentUserName"; // Default title if none match
+    }
 
     final Map<String, dynamic> message = {
       'message': {
         'token': deviceToken,
         'notification': {
-          'title': "BOOKING REQUEST FROM $currentUserName",
+          'title': title,
           'body': "Booking date: $date \nBooking time: $timeSlot"
         },
         'data': {
@@ -78,6 +93,57 @@ class NotificationService {
       },
       body: jsonEncode(message),
     );
+    if (response.statusCode == 200) {
+      print('Notification sent successfully');
+    } else {
+      print('Failed to send FCM message: ${response.body}');
+    }
+  }
+
+  static sendNotificationToStudent(
+      String deviceToken,
+      BuildContext context,
+      String bookingId,
+      String date,
+      String timeSlot,
+      String tutorName,
+      bool isAccepted,
+      bool isCanceled) async {
+    final String serverAccessTokenKey = await getAccessToken();
+    String endPointFirebaseCloudMessaging =
+        'https://fcm.googleapis.com/v1/projects/educonnect-410d6/messages:send';
+
+    String title;
+    if (isAccepted) {
+      title = "Booking Accepted by $tutorName";
+    } else if (isCanceled) {
+      title = "Booking Canceled by $tutorName";
+    } else {
+      title = "Notification from $tutorName"; // Default title if none match
+    }
+
+    final Map<String, dynamic> message = {
+      'message': {
+        'token': deviceToken,
+        'notification': {
+          'title': title,
+          'body': "Booking date: $date \nBooking time: $timeSlot"
+        },
+        'data': {
+          'bookingId': bookingId,
+        }
+      }
+    };
+
+    final http.Response response = await http.post(
+      Uri.parse(endPointFirebaseCloudMessaging),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $serverAccessTokenKey'
+      },
+      body: jsonEncode(message),
+    );
+
     if (response.statusCode == 200) {
       print('Notification sent successfully');
     } else {

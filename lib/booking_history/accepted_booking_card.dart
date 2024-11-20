@@ -126,6 +126,7 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
           .update({
         'isAccepted': false,
         'isCompleted': true,
+        'sessionConfirmed': false,
       });
     } catch (e) {
       print('Error updating booking status: $e');
