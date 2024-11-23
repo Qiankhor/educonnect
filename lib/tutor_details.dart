@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_bottom_sheet.dart';
 import 'package:educonnect/review_card.dart';
 import 'package:educonnect/tutor_personal_info.dart';
@@ -48,22 +49,64 @@ class TutorDetails extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  5,
-                  (index) {
-                    return Icon(
-                      index < (tutor.rating ?? 0)
-                          ? Icons.star
-                          : Icons.star_border,
-                      color: Colors.black,
-                      size: 24,
-                    );
-                  },
-                ),
-              ),
+            FutureBuilder<QuerySnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(tutor.id)
+                  .collection('ratings')
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  // Don't display the rating stars if no ratings
+                  return const SizedBox.shrink(); // Empty widget
+                }
+
+                // Calculate the average rating
+                double totalRating = 0.0;
+                int ratingCount = snapshot.data!.docs.length;
+
+                for (var doc in snapshot.data!.docs) {
+                  totalRating += doc['rating'] ?? 0.0;
+                }
+
+                double averageRating = totalRating / ratingCount;
+
+                // Display the rating stars
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(5, (index) {
+                    if (averageRating >= index + 1) {
+                      return const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                        size: 20,
+                      );
+                    } else if (averageRating > index &&
+                        averageRating < index + 1) {
+                      return const Icon(
+                        Icons.star_half,
+                        color: Colors.amber,
+                        size: 20,
+                      );
+                    } else {
+                      return const Icon(
+                        Icons.star_border,
+                        color: Colors.amber,
+                        size: 20,
+                      );
+                    }
+                  }),
+                );
+              },
+            ),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -134,41 +177,95 @@ class TutorDetails extends StatelessWidget {
                       child: Text(tutor.aboutMe),
                     ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
-                        const Text(
-                          'Reviews (1)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                  FutureBuilder<QuerySnapshot>(
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(tutor.id)
+                        .collection('ratings')
+                        .get(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return const SizedBox
+                            .shrink(); // Empty widget if no ratings
+                      }
+
+                      // Calculate the average rating
+                      double totalRating = 0.0;
+                      int ratingCount = snapshot.data!.docs.length;
+
+                      for (var doc in snapshot.data!.docs) {
+                        totalRating += doc['rating'] ?? 0.0;
+                      }
+
+                      double averageRating = totalRating / ratingCount;
+
+                      // Create a list of reviews from the snapshot
+                      List<String> reviews = snapshot.data!.docs
+                          .map((doc) => doc['review'] != null
+                              ? doc['review'].toString()
+                              : '')
+                          .toList();
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'Reviews',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 2),
+                              Text(
+                                '($ratingCount)', // Show the number of reviews
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Row(
+                                children: [
+                                  Text(
+                                    averageRating.toStringAsFixed(
+                                        1), // Display rating as a number with one decimal place
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors
+                                        .amber, // Yellow color for filled star
+                                    size: 20, // Set the size of the star
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                      const SizedBox(width: 8),
-                      if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
-                        Row(
-                          children: List.generate(
-                            5,
-                            (index) {
-                              return Icon(
-                                index < (tutor.rating ?? 0)
-                                    ? Icons.star
-                                    : Icons.star_border,
-                                color: Colors.black,
-                                size: 24,
-                              );
-                            },
-                          ),
-                        ),
-                    ],
+                          const SizedBox(height: 10),
+                          // ReviewCard widget if you want to show more detailed reviews
+                          if (reviews.isNotEmpty)
+                            ReviewCard(
+                              tutor: tutor,
+                            ),
+                        ],
+                      );
+                    },
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
-                    ReviewCard(
-                      tutor: tutor,
-                    ),
                 ],
               ),
             ),

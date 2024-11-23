@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/tutor_details.dart';
 import 'package:educonnect/tutor.dart';
@@ -55,17 +56,63 @@ class TutorCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (tutor.reviews != null && tutor.reviews!.isNotEmpty)
-                  Row(
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < (tutor.rating ?? 0)
-                            ? Icons.star
-                            : Icons.star_border,
-                        color: Colors.black,
-                      );
-                    }),
-                  ),
+                FutureBuilder<QuerySnapshot>(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(tutor.id)
+                      .collection('ratings')
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      // Don't display the rating stars if no ratings
+                      return const SizedBox.shrink(); // Empty widget
+                    }
+
+                    // Calculate the average rating
+                    double totalRating = 0.0;
+                    int ratingCount = snapshot.data!.docs.length;
+
+                    for (var doc in snapshot.data!.docs) {
+                      totalRating += doc['rating'] ?? 0.0;
+                    }
+
+                    double averageRating = totalRating / ratingCount;
+
+                    // Display the rating stars
+                    return Row(
+                      children: List.generate(5, (index) {
+                        if (averageRating >= index + 1) {
+                          return const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 20,
+                          );
+                        } else if (averageRating > index &&
+                            averageRating < index + 1) {
+                          return const Icon(
+                            Icons.star_half,
+                            color: Colors.amber,
+                            size: 20,
+                          );
+                        } else {
+                          return const Icon(
+                            Icons.star_border,
+                            color: Colors.amber,
+                            size: 20,
+                          );
+                        }
+                      }),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(width: 10),
