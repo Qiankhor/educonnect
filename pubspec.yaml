@@ -30,6 +30,10 @@ dependencies:
   google_sign_in: ^6.2.2
   firebase_messaging: ^15.1.4
   flutter_pannable_rating_bar: ^2.7.2+1
+  fl_chart: ^0.69.2
+  flutter_colorpicker: ^1.1.0
+  sqflite: ^2.4.1
+  path: ^1.9.0
 
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.6

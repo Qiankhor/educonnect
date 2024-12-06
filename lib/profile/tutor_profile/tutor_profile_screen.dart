@@ -239,8 +239,8 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
                         : 'Not Set',
                 true,
               ),
-              _buildProfileListItem(
-                  context, 'Payment Method', _paymentMethod ?? 'Not Set', true),
+              // _buildProfileListItem(
+              //     context, 'Payment Method', _paymentMethod ?? 'Not Set', true),
               _buildSupportQueriesSection(),
             ],
           ),

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:educonnect/profile/edit_field_screen.dart';
 import 'package:educonnect/profile/payment_method_screen.dart';
 import 'package:educonnect/profile/student_profile/online_learning_resources_screen.dart';
-import 'package:educonnect/profile/student_profile/progress_tracking_screen.dart';
+import 'package:educonnect/profile/student_profile/progress_tracking/progress_tracking_screen.dart';
 import 'package:educonnect/profile/support_queries_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -203,10 +203,9 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                   _educationLevel ?? 'Set Education Level', true),
               _buildProfileListItem(context, 'Standard/Form',
                   _standardForm ?? 'Set Standard/Form', true),
-              _buildProfileListItem(context, 'Payment Method',
-                  _paymentMethod ?? 'Set Payment Method', true),
-              _buildSection(
-                  'Progress Tracking', const ProgressTrackingScreen()),
+              // _buildProfileListItem(context, 'Payment Method',
+              //     _paymentMethod ?? 'Set Payment Method', true),
+              _buildSection('Progress Tracking', ProgressTrackingScreen()),
               _buildSection('Online Learning Resources',
                   const OnlineLearningResourcesScreen()),
               _buildSection(
@@ -290,7 +289,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
     } else if (field == 'Progress Tracking') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ProgressTrackingScreen()),
+        MaterialPageRoute(builder: (context) => ProgressTrackingScreen()),
       ).then((_) => _fetchUserData());
     } else if (field == 'Online Learning Resources') {
       Navigator.push(

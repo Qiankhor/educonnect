@@ -128,6 +128,7 @@ MERGED from [:flutter_plugin_android_lifecycle] C:\Users\yiqia\dev\projects\educ
 MERGED from [:fluttertoast] C:\Users\yiqia\dev\projects\educonnect\build\fluttertoast\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:google_sign_in_android] C:\Users\yiqia\dev\projects\educonnect\build\google_sign_in_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider_android] C:\Users\yiqia\dev\projects\educonnect\build\path_provider_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite_android] C:\Users\yiqia\dev\projects\educonnect\build\sqflite_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:url_launcher_android] C:\Users\yiqia\dev\projects\educonnect\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-14:12
 MERGED from [com.google.firebase:firebase-firestore:25.1.1] C:\Users\yiqia\.gradle\caches\transforms-4\7c0e74d155005fc44b31a0673271e10a\transformed\jetified-firebase-firestore-25.1.1\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-analytics:22.1.2] C:\Users\yiqia\.gradle\caches\transforms-4\8a570623886e8e0d433fd4d3cc3a5b95\transformed\jetified-firebase-analytics-22.1.2\AndroidManifest.xml:2:1-9:12
@@ -331,6 +332,8 @@ MERGED from [:google_sign_in_android] C:\Users\yiqia\dev\projects\educonnect\bui
 MERGED from [:google_sign_in_android] C:\Users\yiqia\dev\projects\educonnect\build\google_sign_in_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] C:\Users\yiqia\dev\projects\educonnect\build\path_provider_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] C:\Users\yiqia\dev\projects\educonnect\build\path_provider_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite_android] C:\Users\yiqia\dev\projects\educonnect\build\sqflite_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite_android] C:\Users\yiqia\dev\projects\educonnect\build\sqflite_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:url_launcher_android] C:\Users\yiqia\dev\projects\educonnect\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:url_launcher_android] C:\Users\yiqia\dev\projects\educonnect\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore:25.1.1] C:\Users\yiqia\.gradle\caches\transforms-4\7c0e74d155005fc44b31a0673271e10a\transformed\jetified-firebase-firestore-25.1.1\AndroidManifest.xml:6:5-44
