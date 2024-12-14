@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educonnect/booking_bottom_sheet.dart';
+import 'package:educonnect/chat_screen.dart';
 import 'package:educonnect/review_card.dart';
 import 'package:educonnect/tutor_personal_info.dart';
 import 'package:flutter/material.dart';
@@ -277,7 +278,25 @@ class TutorDetails extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      tutorId: tutor.id,
+                      tutorName: tutor.name,
+                      studentName: currentUser.name,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.message,
+                color: Color.fromARGB(255, 79, 101, 241),
+                size: 20,
+              ),
+            ),
             const SizedBox(width: 15),
             Expanded(
               child: ElevatedButton(

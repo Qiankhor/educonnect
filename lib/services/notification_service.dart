@@ -150,4 +150,55 @@ class NotificationService {
       print('Failed to send FCM message: ${response.body}');
     }
   }
+
+  static sendSessionNotification(
+      String studentDeviceToken,
+      String tutorDeviceToken,
+      String bookingId,
+      String date,
+      String timeSlot) async {
+    final String serverAccessTokenKey = await getAccessToken();
+    String endPointFirebaseCloudMessaging =
+        'https://fcm.googleapis.com/v1/projects/educonnect-410d6/messages:send';
+
+    // Common notification details
+    final List<Map<String, dynamic>> message = [
+      {
+        'token': studentDeviceToken,
+        'notification': {
+          'title': 'Upcoming Session Reminder',
+          'body': 'Your session is starting soon! Date: $date, Time: $timeSlot',
+        },
+        'data': {
+          'bookingId': bookingId,
+        }
+      },
+      {
+        'token': tutorDeviceToken,
+        'notification': {
+          'title': 'Upcoming Session Reminder',
+          'body':
+              'You have a session starting soon! Date: $date, Time: $timeSlot',
+        },
+        'data': {
+          'bookingId': bookingId,
+        }
+      }
+    ];
+
+    final http.Response response = await http.post(
+      Uri.parse(endPointFirebaseCloudMessaging),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $serverAccessTokenKey'
+      },
+      body: jsonEncode(message),
+    );
+
+    if (response.statusCode == 200) {
+      print('Notification sent successfully');
+    } else {
+      print('Failed to send FCM message: ${response.body}');
+    }
+  }
 }

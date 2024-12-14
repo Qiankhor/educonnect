@@ -1,4 +1,4 @@
-import 'package:educonnect/chat_screen.dart';
+import 'package:educonnect/chat_list_screen.dart';
 import 'package:educonnect/services/current_user_service.dart';
 import 'package:educonnect/home.dart';
 import 'package:educonnect/booking_history/schedule_screen.dart';
@@ -75,7 +75,7 @@ class NavigationController extends GetxController {
       screens.addAll([
         HomeScreen(tutors: tutors, currentUser: currentUser),
         const ScheduleScreen(),
-        const ChatScreen(),
+        ChatListScreen(),
         const ProfileScreen(),
       ]);
     } catch (e) {

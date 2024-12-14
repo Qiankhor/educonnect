@@ -1,3 +1,4 @@
+import 'package:educonnect/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -79,6 +80,16 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
         String? meetingLink = bookingDoc['meetingLink'];
         String dateStr = bookingDoc['date'];
         String timeStr = bookingDoc['time'];
+        String tutorId = bookingDoc['tutorId'];
+        String userId = bookingDoc['userId'];
+
+        String? tutorToken = await _getUserDeviceToken(tutorId);
+        String? userToken = await _getUserDeviceToken(userId);
+
+        if (tutorToken == null || userToken == null) {
+          print('Error: One or both device tokens are missing.');
+          return null;
+        }
 
         List<String> timeParts = timeStr.split(' - ');
         if (timeParts.length == 2) {
@@ -88,6 +99,8 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
               _parseBookingTime(dateStr, timeParts[1].trim());
 
           DateTime currentTimeInMYT = DateTime.now();
+          DateTime linkAvailabilityTime =
+              bookingStartTime.subtract(const Duration(minutes: 30));
 
           // If the current date is the same as the booking date, check the time
 
@@ -95,7 +108,16 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
             await _updateBookingStatus(bookingDoc.id);
           }
 
-          if (currentTimeInMYT.isAfter(bookingStartTime) &&
+          // Send notifications 30 minutes before the session starts
+          if (currentTimeInMYT.isAfter(linkAvailabilityTime) &&
+              currentTimeInMYT.isBefore(
+                  linkAvailabilityTime.add(const Duration(minutes: 1)))) {
+            await NotificationService.sendSessionNotification(
+                userToken, tutorToken, bookingId, dateStr, timeStr);
+          }
+
+          // Return the meeting link if within the valid timeframe
+          if (currentTimeInMYT.isAfter(linkAvailabilityTime) &&
               currentTimeInMYT.isBefore(bookingEndTime)) {
             return meetingLink;
           }
@@ -115,6 +137,21 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
     } catch (e) {
       print('Error parsing date: $e');
       return DateTime.now();
+    }
+  }
+
+  Future<String?> _getUserDeviceToken(String userId) async {
+    try {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (userDoc.exists) {
+        return userDoc['token']; // Assuming 'deviceToken' is the field name
+      }
+    } catch (e) {
+      print('Error retrieving device token for user $userId: $e');
     }
   }
 

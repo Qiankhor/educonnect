@@ -3,6 +3,7 @@ import 'package:educonnect/booking_history/accepted_booking_card.dart';
 import 'package:educonnect/booking_history/canceled_booking_card.dart';
 import 'package:educonnect/booking_history/completed_booking_card.dart';
 import 'package:educonnect/booking_history/pending_booking_card.dart';
+import 'package:educonnect/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -141,7 +142,16 @@ Widget _buildUserRoleDisplay(
             ),
             IconButton(
               onPressed: () {
-                // TODO: Navigate to chat feature
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      tutorId: tutorId,
+                      tutorName: tutorName,
+                      studentName: userName,
+                    ),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.message,

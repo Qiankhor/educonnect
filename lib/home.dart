@@ -1,4 +1,4 @@
-import 'package:educonnect/chat_screen.dart';
+import 'package:educonnect/chat_list_screen.dart';
 import 'package:educonnect/current_user.dart';
 import 'package:educonnect/primary_level/primary_level.dart';
 import 'package:educonnect/profile/profile_screen.dart';
@@ -87,7 +87,7 @@ class HomeScreenState extends State<HomeScreen> {
         currentUser: currentUser, // Pass currentUser to SecondaryScreen
       ),
       const ScheduleScreen(),
-      const ChatScreen(),
+      ChatListScreen(),
       const ProfileScreen(),
     ];
 
