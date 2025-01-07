@@ -123,24 +123,6 @@ class BookingConfirmationPage extends StatelessWidget {
                             );
 
                             try {
-                              DocumentSnapshot tutorSnapshot =
-                                  await FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(tutorId)
-                                      .get();
-                              String deviceToken = tutorSnapshot['token'];
-
-                              // Send notification to tutor
-                              await NotificationService.sendNotificationToTutor(
-                                  deviceToken,
-                                  context,
-                                  bookingId,
-                                  date,
-                                  timeSlot,
-                                  currentUserName,
-                                  true,
-                                  false,
-                                  false);
                               // Add booking to the 'bookings' collection
                               await FirebaseFirestore.instance
                                   .collection('bookings')
@@ -187,6 +169,25 @@ class BookingConfirmationPage extends StatelessWidget {
                                 fontSize: 16.0,
                               );
                               Navigator.pop(context, newBooking);
+
+                              DocumentSnapshot tutorSnapshot =
+                                  await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(tutorId)
+                                      .get();
+                              String deviceToken = tutorSnapshot['token'];
+
+                              // Send notification to tutor
+                              await NotificationService.sendNotificationToTutor(
+                                  deviceToken,
+                                  context,
+                                  bookingId,
+                                  date,
+                                  timeSlot,
+                                  currentUserName,
+                                  true,
+                                  false,
+                                  false);
                             } catch (e) {
                               print('Error saving booking: $e');
                               ScaffoldMessenger.of(context).showSnackBar(

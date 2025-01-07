@@ -97,9 +97,6 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
       );
       request.files.add(file);
 
-      // Optionally, you can add headers if needed
-      // request.headers['Authorization'] = 'Bearer ${user.token}'; // Uncomment if you have token authentication
-
       // Send the request
       var response = await request.send();
 
@@ -120,7 +117,8 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
           _profileImageUrl = imageUrl;
         });
       } else {
-        print('Failed to upload image: ${response.statusCode}');
+        print(
+            'Failed to upload image: ${response.statusCode}'); // Add this line to check response details
         Fluttertoast.showToast(
           msg: "Failed to upload image. Status code: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
@@ -206,10 +204,9 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
               // _buildProfileListItem(context, 'Payment Method',
               //     _paymentMethod ?? 'Set Payment Method', true),
               _buildSection('Progress Tracking', ProgressTrackingScreen()),
-              _buildSection('Online Learning Resources',
-                  const OnlineLearningResourcesScreen()),
               _buildSection(
-                  'User Support & Queries', const SupportQueriesScreen()),
+                  'Online Learning Resources', OnlineLearningResourcesScreen()),
+              _buildSection('User Support & Queries', SupportQueriesScreen()),
             ],
           ),
         ),

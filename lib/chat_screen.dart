@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:educonnect/inchat_online_learning_resources_screen.dart';
+import 'package:educonnect/profile/student_profile/online_learning_resources_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -109,6 +111,24 @@ class _ChatScreenState extends State<ChatScreen> {
                     Text(otherParticipantName),
                   ],
                 ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                InchatOnlineLearningResourcesScreen(
+                                  chatId:
+                                      _getChatId(currentUserId, widget.tutorId),
+                                  isCurrentUserTutor: isCurrentUserTutor,
+                                )),
+                      );
+                    },
+                    icon: const Icon(Icons.book),
+                    tooltip: "Learning Materials",
+                  )
+                ],
               ),
               body: Column(
                 children: [
