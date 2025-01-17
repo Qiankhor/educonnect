@@ -3,6 +3,7 @@ import 'package:educonnect/booking_bottom_sheet.dart';
 import 'package:educonnect/chat_screen.dart';
 import 'package:educonnect/review_card.dart';
 import 'package:educonnect/tutor_personal_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:educonnect/tutor.dart';
 import 'package:educonnect/current_user.dart';
@@ -280,16 +281,34 @@ class TutorDetails extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                      tutorId: tutor.id,
-                      tutorName: tutor.name,
-                      studentName: currentUser.name,
-                    ),
-                  ),
-                );
+                // Get current authenticated user's ID
+                final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
+                if (currentUserId != null) {
+                  FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(currentUserId)
+                      .get()
+                      .then((userDoc) {
+                    if (userDoc.exists) {
+                      String studentName =
+                          userDoc.data()?['username'] ?? 'Unknown User';
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                            tutorId: tutor.id,
+                            tutorName: tutor.name,
+                            studentName:
+                                studentName, // Using directly fetched username
+                          ),
+                        ),
+                      );
+                    }
+                  }).catchError((error) {
+                    print('Error fetching user data: $error');
+                  });
+                }
               },
               icon: const Icon(
                 Icons.message,
@@ -320,7 +339,6 @@ class TutorDetails extends StatelessWidget {
                 child: Text(
                   'Book a schedule (RM${tutor.ratePerHour}/hour)',
                   style: const TextStyle(
-                    fontSize: 18,
                     color: Colors.white,
                   ),
                 ),

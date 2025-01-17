@@ -19,44 +19,68 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/logo.png",
-            height: 60, // Adjust the height as necessary
-          ),
-          const SizedBox(width: 10),
-          TextButton(
-            onPressed: () => onTabTapped(0),
-            child: Text(
-              'Primary level',
-              style: TextStyle(
-                fontSize: 12,
-                color:
-                    currentIndex == 0 ? const Color(0xFF1F42FF) : Colors.black,
-                decoration: currentIndex == 0
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
+      title: LayoutBuilder(
+        builder: (context, constraints) {
+          // Define the width threshold at which to change layout
+          bool isNarrow = constraints.maxWidth < 400; // Adjust as necessary
+
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo (Fixed width)
+              Image.asset(
+                "assets/logo.png",
+                height: 60, // Adjust the height as necessary
               ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          TextButton(
-            onPressed: () => onTabTapped(1),
-            child: Text(
-              'Secondary level',
-              style: TextStyle(
-                fontSize: 12,
-                color:
-                    currentIndex == 1 ? const Color(0xFF1F42FF) : Colors.black,
-                decoration: currentIndex == 1
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
+              const SizedBox(width: 10),
+              // Text buttons inside Expanded to avoid overflow
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Primary Level Tab
+                    TextButton(
+                      onPressed: () => onTabTapped(0),
+                      child: Text(
+                        'Primary level',
+                        style: TextStyle(
+                          fontSize: isNarrow
+                              ? 10
+                              : 12, // Adjust font size on narrow screens
+                          color: currentIndex == 0
+                              ? const Color(0xFF1F42FF)
+                              : Colors.black,
+                          decoration: currentIndex == 0
+                              ? TextDecoration.underline
+                              : TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    // Secondary Level Tab
+                    TextButton(
+                      onPressed: () => onTabTapped(1),
+                      child: Text(
+                        'Secondary level',
+                        style: TextStyle(
+                          fontSize: isNarrow
+                              ? 10
+                              : 12, // Adjust font size on narrow screens
+                          color: currentIndex == 1
+                              ? const Color(0xFF1F42FF)
+                              : Colors.black,
+                          decoration: currentIndex == 1
+                              ? TextDecoration.underline
+                              : TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
       actions: [
         IconButton(

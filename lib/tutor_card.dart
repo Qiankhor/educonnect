@@ -49,11 +49,19 @@ class TutorCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
-                  tutor.name,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: 140, // Adjust width as needed for your layout
+                  child: Text(
+                    tutor.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16, // Adjust font size for better fit
+                    ),
+                    overflow: TextOverflow
+                        .ellipsis, // Adds '...' if the name is too long
+                    maxLines: 1, // Ensures the name stays on a single line
+                    textAlign:
+                        TextAlign.center, // Centers the text within the box
                   ),
                 ),
                 FutureBuilder<QuerySnapshot>(
@@ -123,8 +131,8 @@ class TutorCard extends StatelessWidget {
                   Row(
                     children: [
                       _buildInfoTag(tutor.subject),
-                      const SizedBox(width: 5),
-                      _buildInfoTag(tutor.level),
+                      // const SizedBox(width: 5),
+                      // _buildInfoTag(tutor.level),
                       const Spacer(),
                       Text(
                         'RM${tutor.ratePerHour.toStringAsFixed(0)}/hour',
@@ -149,6 +157,8 @@ class TutorCard extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        print(
+                            'Student ID: ${currentUser.id}, Student Name: ${currentUser.name}');
                         Navigator.push(
                           context,
                           MaterialPageRoute(

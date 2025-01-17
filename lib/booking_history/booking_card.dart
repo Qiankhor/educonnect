@@ -141,17 +141,43 @@ Widget _buildUserRoleDisplay(
               ),
             ),
             IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                      tutorId: tutorId,
-                      tutorName: tutorName,
-                      studentName: userName,
-                    ),
-                  ),
-                );
+              onPressed: () async {
+                final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
+                if (currentUserId != null) {
+                  // Check if current user is tutor
+                  if (currentUserId == tutorId) {
+                    // Current user is tutor, pass userId as tutorId
+                    print(
+                        "User is tutor. Student ID: $userId, Tutor name: $tutorName, Student name: $userName");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                          tutorId:
+                              userId, // Pass student ID since we're the tutor
+                          tutorName: tutorName,
+                          studentName: userName,
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Current user is student, pass tutorId as tutorId
+                    print(
+                        "User is student. Tutor ID: $tutorId, Tutor name: $tutorName, Student name: $userName");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                          tutorId:
+                              tutorId, // Pass tutor ID since we're the student
+                          tutorName: tutorName,
+                          studentName: userName,
+                        ),
+                      ),
+                    );
+                  }
+                }
               },
               icon: const Icon(
                 Icons.message,

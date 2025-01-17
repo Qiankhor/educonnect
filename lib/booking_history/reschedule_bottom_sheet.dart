@@ -299,8 +299,7 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
               ? const Color.fromARGB(255, 59, 208, 89)
               : const Color.fromARGB(255, 186, 240, 202),
           foregroundColor: Colors.black,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          textStyle: const TextStyle(fontSize: 16),
+          padding: const EdgeInsets.all(5.0),
         ),
         onPressed: () {
           setState(() {

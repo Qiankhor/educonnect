@@ -9,7 +9,7 @@
     },
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.45",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.49",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -45,27 +45,27 @@
     },
     {
       "name": "cloud_firestore",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-5.4.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-5.6.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.4.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.6.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-4.3.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-4.4.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "collection",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.18.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "cross_file",
@@ -111,7 +111,7 @@
     },
     {
       "name": "file_selector_linux",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.3+2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -135,115 +135,115 @@
     },
     {
       "name": "firebase_analytics",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics-11.3.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics-11.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_analytics_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_platform_interface-4.2.6",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_platform_interface-4.3.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_analytics_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_web-0.5.10+3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_analytics_web-0.5.10+6",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_app_check",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check-0.3.1+5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check-0.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_app_check_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_platform_interface-0.1.0+39",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_platform_interface-0.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_app_check_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_web-0.2.0+1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_app_check_web-0.2.0+4",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.3.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.8",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.13.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.13.6",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-3.7.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-3.10.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_platform_interface-5.3.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_platform_interface-5.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.18.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.19.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_messaging",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging-15.1.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging-15.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_messaging_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.47",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging_platform_interface-4.6.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_messaging_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging_web-3.9.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_messaging_web-3.10.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_storage",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage-12.3.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage-12.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.32",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_platform_interface-5.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_web-3.10.4",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_web-3.10.7",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.69.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.70.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -261,9 +261,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.5"
     },
     {
       "name": "flutter_pannable_rating_bar",
@@ -279,7 +279,7 @@
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.23",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -297,7 +297,7 @@
     },
     {
       "name": "fluttertoast",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.8",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.10",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -315,7 +315,7 @@
     },
     {
       "name": "google_identity_services_web",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_identity_services_web-0.3.1+5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_identity_services_web-0.3.3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -327,7 +327,7 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.33",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.34",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -369,9 +369,9 @@
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.4"
     },
     {
       "name": "iconsax",
@@ -387,7 +387,7 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+17",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+20",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -399,9 +399,9 @@
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.12+1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.12+2",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.4"
     },
     {
       "name": "image_picker_linux",
@@ -417,9 +417,9 @@
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.10.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.10.1",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.4"
     },
     {
       "name": "image_picker_windows",
@@ -429,19 +429,19 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.20.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "leak_tracker",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.7",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.8",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -453,13 +453,13 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/lints-3.0.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/lints-5.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.6"
     },
     {
       "name": "logger",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/logger-2.4.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/logger-2.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -549,15 +549,15 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.12",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.15",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.4.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.4.1",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "path_provider_linux",
@@ -627,7 +627,7 @@
     },
     {
       "name": "sqflite_darwin",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_darwin-2.4.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_darwin-2.4.1+1",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -639,9 +639,9 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.12.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "stream_channel",
@@ -651,9 +651,9 @@
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.1"
     },
     {
       "name": "synchronized",
@@ -669,9 +669,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.7.2",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.7.3",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.4"
     },
     {
       "name": "typed_data",
@@ -693,19 +693,19 @@
     },
     {
       "name": "url_launcher_ios",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_ios-6.3.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_ios-6.3.2",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "url_launcher_linux",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_linux-3.2.0",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_linux-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.2.1",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.2.2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -723,9 +723,9 @@
     },
     {
       "name": "url_launcher_windows",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-3.1.3",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-3.1.4",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.4"
     },
     {
       "name": "vector_math",
@@ -735,7 +735,7 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-14.2.5",
+      "rootUri": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-14.3.0",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -764,9 +764,9 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2025-01-07T03:19:35.486207Z",
+  "generated": "2025-01-13T09:28:34.791482Z",
   "generator": "pub",
-  "generatorVersion": "3.5.4",
+  "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Users/yiqia/dev/flutter",
   "flutterVersion": "3.24.5",
   "pubCache": "file:///C:/Users/yiqia/AppData/Local/Pub/Cache"

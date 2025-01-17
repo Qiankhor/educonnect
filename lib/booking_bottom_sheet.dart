@@ -167,7 +167,6 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                 },
                 child: const Text(
                   'Confirm Booking',
-                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ),
@@ -269,8 +268,7 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
               ? const Color.fromARGB(255, 59, 208, 89)
               : const Color.fromARGB(255, 186, 240, 202),
           foregroundColor: Colors.black,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          textStyle: const TextStyle(fontSize: 16),
+          padding: const EdgeInsets.all(5.0),
         ),
         onPressed: () {
           setState(() {

@@ -62,11 +62,17 @@ class ChatListScreen extends StatelessWidget {
                             .doc(otherParticipantId)
                             .get(),
                     builder: (context, profileSnapshot) {
-                      String profileImageUrl = profileSnapshot.hasData &&
-                              profileSnapshot.data!.exists &&
-                              profileSnapshot.data!['profileImageUrl'] != null
-                          ? profileSnapshot.data!['profileImageUrl']
-                          : 'assets/blank_profile.png'; // Placeholder image
+                      String profileImageUrl =
+                          'assets/blank_profile.png'; // Default placeholder
+                      if (profileSnapshot.hasData &&
+                          profileSnapshot.data!.exists) {
+                        var profileData = profileSnapshot.data!.data()
+                            as Map<String, dynamic>;
+                        if (profileData.containsKey('profileImageUrl') &&
+                            profileData['profileImageUrl'] != null) {
+                          profileImageUrl = profileData['profileImageUrl'];
+                        }
+                      }
 
                       return ListTile(
                         leading: CircleAvatar(
@@ -86,6 +92,16 @@ class ChatListScreen extends StatelessWidget {
                               )
                             : null,
                         onTap: () {
+                          print(otherParticipantId);
+                          print(role == 'Tutor'
+                              ? otherParticipantName
+                              : chat['participantNames'].firstWhere(
+                                  (name) => name != otherParticipantName));
+                          print(role == 'Student'
+                              ? otherParticipantName
+                              : chat['participantNames'].firstWhere(
+                                  (name) => name != otherParticipantName));
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(

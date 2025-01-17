@@ -109,14 +109,14 @@ class _PendingBookingCardState extends State<PendingBookingCard> {
 
   Widget _buildActionButton(
       BuildContext context, String label, Color color, VoidCallback onPressed) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.4,
-      child: ElevatedButton(
-        onPressed: role != null ? onPressed : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-        ),
+    return ElevatedButton(
+      onPressed: role != null ? onPressed : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+      ),
+      child: FittedBox(
+        fit: BoxFit.scaleDown, // Ensures text scales down to fit
         child: Text(label),
       ),
     );

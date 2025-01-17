@@ -227,6 +227,17 @@ class _ChatScreenState extends State<ChatScreen> {
     final chatId = _getChatId(userId, tutorId);
     final recipientId = userId == tutorId ? studentName : tutorId;
 
+    // Correctly store the participant names in the correct order based on sender
+    final participantNames = userId == tutorId
+        ? [
+            tutorName,
+            studentName
+          ] // Store names correctly for tutor as first participant
+        : [
+            studentName,
+            tutorName
+          ]; // Store names correctly for student as first participant
+
     await FirebaseFirestore.instance
         .collection('chats')
         .doc(chatId)
@@ -240,7 +251,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
     await FirebaseFirestore.instance.collection('chats').doc(chatId).set({
       'participants': [userId, tutorId],
-      'participantNames': [studentName, tutorName],
+      'participantNames':
+          participantNames, // Store participant names in correct order
       'lastMessage': messageText,
       'timestamp': FieldValue.serverTimestamp(),
       'unreadCount': {

@@ -108,7 +108,7 @@ class _AcceptedBookingCardState extends State<AcceptedBookingCard> {
             await _updateBookingStatus(bookingDoc.id);
           }
 
-          // Send notifications 30 minutes before the session starts
+          //Send notifications 30 minutes before the session starts
           if (currentTimeInMYT.isAfter(linkAvailabilityTime) &&
               currentTimeInMYT.isBefore(
                   linkAvailabilityTime.add(const Duration(minutes: 1)))) {
